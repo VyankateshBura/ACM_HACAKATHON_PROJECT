@@ -1,0 +1,73 @@
+.set-exam-page{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.set-ex-outer-box{
+    margin-left:10vw;
+    margin-right: 10vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 80vw;
+    background-color: rgb(218, 237, 247);
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+}
+.course-choice{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:500px;
+    height:6vh;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 3px 3px inset #85858a;
+    margin-bottom: 2vh;
+    margin-left: 1vw;
+    font-size: large;
+}
+.set-exam-options-box{
+    display: block;
+    /* width: 324px; */
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.Exam-button h3{
+    margin: 0;
+}
+
+@media screen and (max-width:1000px) {
+    .course-choice{
+        width: 70vw;
+    }
+    .set-exam-options-box{
+        display: block;
+    }
+    .Exam-button{
+        width: fit-content;
+    }
+}
+.set-exam-options-box :any-link{
+    text-decoration: none;
+}
+.Exam-button{
+    border: solid gray 1px;
+    box-shadow: 2px 2px 5px inset gainsboro ;
+    margin: 30px;
+    padding:5px;
+    border-radius: 10px;
+    padding-inline: 30px;
+    background-color: #ffffff;
+    width: 10vw;
+    padding-block: 10px;
+ 
+}

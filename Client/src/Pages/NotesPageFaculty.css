@@ -1,0 +1,77 @@
+.noteslist-page{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.noteslist-outer-box{
+    margin-left:1vw;
+    margin-right: 1vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 96vw;
+    background-color: rgb(218, 237, 247);
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+}
+.notes-file{
+    width: 60vw;
+    height: 8vh;
+    background-color: white;
+    border:1px solid #282b77;
+    box-shadow: 2px 3px 3px #85858a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 4vh 0px;
+}
+.notes-file-name{
+    font-family: 'Verdana';
+    font-size: 20px;
+    color:#282b77;
+}
+.noteslist-title{
+    width:36vw;
+    height:6vh;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 3px 3px inset #85858a;
+    margin: 5.5vh 0px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.noteslist-name{
+    font-family: 'Verdana';
+    font-size: 20px;
+    color:#282b77;
+}
+.add-notes-button{
+    width:200px;
+    height: 38px;
+    background-color: #282b77;
+    color:white;
+    border:none;
+    font-size: 18px;
+    font-family: Verdana;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px gray;
+    cursor: pointer;
+}
+.add-notes-button:hover{
+    font-size: 20px;
+    background-color: rgb(17, 10, 52);
+}
+.add-notes-label{
+    font-family: "Verdana";
+    font-size: 20px;
+}
+.add-notes-span{
+    display: inline;
+}

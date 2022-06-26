@@ -1,0 +1,31 @@
+.toggle-outer-box-white{
+    width:144px;
+    height:52px;
+    border: none;
+    box-shadow: 2px 2px 4px inset rgb(177, 177, 177);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding-left: 7px;
+    padding-right: 7px; */
+}
+.toggle-inner-box-white{
+    width:130px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgb(177, 177, 177);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.inner-box-white:hover{
+    font-size: 18px;
+}
+h4{
+    font-family: Verdana;
+    font-weight: bold;
+}

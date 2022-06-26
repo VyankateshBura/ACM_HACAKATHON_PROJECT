@@ -1,0 +1,56 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin: 0;
+}
+.outer-box{
+    /* margin-left:14vw; */
+    margin-right: 10vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 80vw;
+    background-color: rgb(218, 237, 247);
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding-top: 3vh;
+    padding-bottom: 5.5vh;
+    padding-left: 4vw;
+}
+.dashboard-title{
+    width:25vh;
+    height:6vh;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 3px 3px inset #85858a;
+    margin: 4vh 0px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.dashboard-name{
+    font-family: 'Verdana';
+    font-size: 20px;
+    color:#282b77;
+}
+.text-field{
+    width:75vw;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    justify-content: center;
+}
+.headd{
+    color: #282b77;
+    padding-left: 1vw;
+    margin-bottom: 0vh;
+}
+.paragraph{
+    color: black;
+    font-family:  'Arial Narrow', Arial, sans-serif;
+}

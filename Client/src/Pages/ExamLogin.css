@@ -1,0 +1,56 @@
+.exam-login-page{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.exam-login-outer-box{
+    margin-left:10vw;
+    margin-right: 10vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 80vw;
+    background-color: rgb(218, 237, 247);
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+}
+.start-exam-btn{
+    width:200px;
+    height: 38px;
+    background-color: #282b77;
+    color:white;
+    border:none;
+    font-size: 18px;
+    font-family: Verdana;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px gray;
+    cursor: pointer;
+}
+.start-exam-btn:hover{
+    font-size: 20px;
+    background-color: rgb(17, 10, 52);
+}
+.sub-choice{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:20vw;
+    height:6vh;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 3px 3px inset #85858a;
+    margin-bottom: 2vh;
+    margin-left: 1vw;
+}
+.exam-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,124 @@
+.Main-box{
+    display: flex;
+    align-items:flex-start ;
+    justify-content:center;
+    flex-direction: column;
+    width: 90vw;
+    height: 50vh;
+    background-color: white;
+    padding-bottom: 3vh;
+    /* border:0.5px solid gray; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgb(177, 177, 177);
+    margin-bottom: 2vh;
+    border-left: 2px solid gray;
+    padding-left: 40px;
+}
+
+.Desc-block1{
+    margin: 2px;
+    border: solid 2px gray ;
+    height: 30px;
+    width: 71px;
+    box-shadow: 2px;
+    border-radius: 3px;
+}
+
+.Desc-block2{
+    margin: 2px;
+    border: solid 2px gray ;
+    height: 25%;
+    width: 70vw;
+    border-radius: 3px;
+}
+
+.textOut{
+    display: block;
+}
+
+.Desc-options{
+    border: solid 2px gray;
+    margin-left: 2px;
+    width: 70vw;
+    text-align:justify;
+    text-justify: distribute;
+    padding: 10px;
+    margin-block: 5px;
+    padding-right: 0%;
+    border-radius: 3px;
+}
+
+/* .submitButton{
+    width:98%;
+    display: flex;
+    align-items: center;
+    justify-content:center; 
+}
+
+.submitButtonIn{
+    margin: 10px;
+}
+
+.Desc-second-box{
+    border-left: solid 2px gray;
+    padding: 10px;
+    width: 450px;
+    border-radius: 3px;
+}
+
+.queNumber{
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    margin: 5px;
+
+} */
+
+.textin{
+    width: 70vw;
+    height: 15vh;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    resize: none;
+    border-radius: 3px;
+}
+
+/* input[type=file]::file-selector-button {
+    border: 2px solid ;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: #282b77;
+    transition: 1s;
+    color: white;
+    margin-bottom: 15px;
+  } */
+
+  /* @media screen and (max-height:950px) {
+    .textin{
+        width: 98%;
+        height: 5vh;
+    }
+    .submitButtonIn{
+        height: 5vh;
+    }
+    .Desc-box1{
+        height:700px;
+    }
+  } */
+
+  /* @media screen and (max-width:800px) {
+    .Desc-box2{
+        display: block;
+        margin: 2px;
+        height: auto;
+        width: 96vw;
+    }
+  }
+
+  @media screen and (max-width:500px) {
+    
+    .submitButton{
+        display: block;
+        margin-block: 2px;
+    }
+} */

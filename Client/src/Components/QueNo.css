@@ -1,0 +1,19 @@
+.numberBox{
+    border: solid 2px gray;
+    /* height: 5vh;
+    width: 5vw; */
+    text-align: center;
+    margin: 10px;
+}
+
+/* @media screen and (max-width:800px) {
+    .numberBox{
+    width: 5vw;
+    }
+       
+}
+
+@media screen and (max-width:450px) {
+
+    
+} */

@@ -1,0 +1,36 @@
+.homes{
+    width:60vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; 
+    margin-inline: 20%;
+}
+.homimg{
+    @media screen and (max-width:800px) {
+        .homes{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-block: 3px;
+            height: fit-content;
+        }
+        .home-1-button{
+            margin-block:3px ;
+            margin-top: 5px;
+        }
+    }
+    
+    @media screen and (max-width:1200px) {
+        .homes{
+            height: fit-content;
+            margin-top: 15px;
+        }
+    }
+}
+/* @media screen and (max-width=545) {
+    .home{
+        display:block;
+    }
+} */

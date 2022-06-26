@@ -1,0 +1,57 @@
+.avail-page{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.avail-outer-box{
+    margin-left:1vw;
+    margin-right: 1vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 96vw;
+    background-color: rgb(218, 237, 247);
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+}
+.paper{
+    width: 60vw;
+    height: 10vh;
+    background-color: white;
+    border:1px solid #282b77;
+    box-shadow: 2px 3px 3px #85858a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 4vh 0px;
+}
+.paper-name{
+    font-family: 'Verdana';
+    font-size: 20px;
+    color:#282b77;
+}
+.avail-title{
+    width:36vw;
+    height:6vh;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 3px 3px inset #85858a;
+    margin: 5.5vh 0px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.avail-name{
+    font-family: 'Verdana';
+    font-size: 20px;
+    color:#282b77;
+}
+.delete-icon{
+    margin-left: 48vw;
+}

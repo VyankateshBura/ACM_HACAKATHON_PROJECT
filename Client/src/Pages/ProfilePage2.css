@@ -1,0 +1,113 @@
+.Edit-Profile-page{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: Verdana;
+}
+
+.Edit-colOut{
+    width: 50%;
+}
+
+.Edit-Profile-outer-box{
+    margin-left:10vw;
+    margin-right: 10vw;
+    margin-top: 10vh;
+    height: auto;
+    width: 80vw;
+    background-color: white;
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+}
+.profile-button{
+    width:40vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    
+    margin-inline: 20%;
+    margin-left: 0;
+    
+}
+.Edit-col1{
+    padding-right: 40px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    column-gap:normal;
+}
+
+.Edit-mainPart{
+    border: solid black 1px;
+    width: 60vw;
+    height: fit-content;
+}
+
+.repeat-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.repeat-it{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.repeat-btn{
+    width:100px;
+    height: 28px;
+    background-color: #282b77;
+    color:white;
+    border:none;
+    font-size: 12px;
+    font-family: Verdana;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px gray;
+    cursor: pointer;
+    margin:1vh;
+}
+.edit-save{
+    margin: 2vh;
+}
+
+@media screen and (max-width:800px)
+{
+    .Edit-col1{
+        display: inline;
+    }
+    .Edit-colIn{
+        margin-bottom: 5px;
+        padding-left: 5px;
+    }
+    .profile-button{
+        display: block;
+        height: 10vh;
+    }
+    .Edit-colOut{
+        padding-left: 5px;
+    }
+    @media screen and (max-height:1150px) {
+        .profile-button{
+            height: 5vh;
+            width: 15vw;
+            display: inline;
+        }
+    }
+}
+
+/* @media screen and (max-height:1150px) {
+    .profile-button{
+        height: 5vh;
+        width: 15vw;
+
+    }
+} */

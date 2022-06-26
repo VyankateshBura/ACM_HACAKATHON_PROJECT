@@ -1,0 +1,30 @@
+.container{
+    margin:3vw;
+    border:2px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #282b77;
+    color: white;
+    font-family: "Verdana";
+    border-radius: 5px;
+    padding:0.5vw;
+}
+.pdf-container{
+    width: 99%;
+    height: 100vh;
+    background-color: #e4e4e4;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+  }
+  
+  .error-msg{
+    width: 100%;
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+  }

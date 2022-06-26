@@ -1,0 +1,53 @@
+.marks{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    height: 60px;
+    width: 70vw;
+}
+
+.question{
+    display: flex;
+    align-items:flex-start ;
+    justify-content:center;
+    flex-direction: column;
+    width: 90vw;
+    height: 50vh;
+    background-color: white;
+    padding-bottom: 3vh;
+    /* border:0.5px solid gray; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgb(177, 177, 177);
+    margin-bottom: 2vh;
+    border-left: 2px solid gray;
+}
+
+.marks div{
+    margin-right:  10px;
+    padding-top: 2px;
+    padding-left: 5px;
+}
+
+.marks button{
+    padding-inline: 25px;
+    margin-inline: 5px;
+    border-radius: 5px;
+    box-shadow:inset;
+    background-color: white;
+    border-color: grey;
+}
+
+.second-sec{
+    margin-left:  10px;
+    padding-top: 2px;
+    padding-left: 5px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width:1000px) {
+    .marks{
+        display: block;
+        height: fit-content;
+    }
+ 
+}

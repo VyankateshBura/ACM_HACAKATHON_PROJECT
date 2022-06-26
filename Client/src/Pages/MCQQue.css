@@ -1,0 +1,132 @@
+
+.MCQ-Que-Page{
+    display: flex;
+    align-items:flex-start ;
+    justify-content:center;
+    flex-direction: column;
+    width: 90vw;
+    height: 50vh;
+    background-color: white;
+    padding-bottom: 3vh;
+    /* border:0.5px solid gray; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgb(177, 177, 177);
+    margin-bottom: 2vh;
+    border-left: 2px solid gray;
+    padding-left: 40px;
+
+}
+
+/* .MCQ-box1{
+    margin-left:1vw;
+    margin-right: 1vw;
+    margin-top: 10vh;
+    height: 70vh;
+    width: 96vw;
+    background-color: white;
+    border: 8px solid rgb(199, 198, 198);
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px inset gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5.5vh;
+    padding-bottom: 5.5vh;
+    
+}
+
+.MCQ-box2{
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+    height: auto;
+    width: 96vw;
+}
+
+.MCQ-first-box{
+    width: 96vw;
+    padding: 7px;
+    padding-right: 0;
+} */
+
+
+.MCQ-block1{
+    margin: 2px;
+    border: solid 2px gray ;
+    height:fit-content;
+    width: 70px;
+    box-shadow: 2px;
+    border-radius: 3px;
+}
+
+.MCQ-block2{
+    margin: 2px;
+    border: solid 2px gray ;
+    height: 25%;
+    width: 70vw;
+    border-radius: 3px;
+}
+
+.MCQ-options{
+    height: fit-content;
+    border: solid 2px gray;
+
+    width: 50vw;
+    text-align:justify;
+    text-justify: distribute;
+    padding: 10px;
+    margin-block: 5px;
+
+}
+
+/* .MCQ-submitButton{
+    width:98%;
+    display: flex;
+    align-items: center;
+    justify-content:center; 
+}
+
+.MCQ-submitButtonIn{
+    margin: 10px;
+}
+
+.MCQ-second-box{
+    border-left: solid 2px gray;
+    padding: 10px;
+    height: 500px;
+    width: 450px;
+    
+}
+
+.queNumber{
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    margin: 5px;
+}
+
+@media screen and (max-height:950px) {
+    .MCQ-submitButtonIn{
+        height: 5vh;
+    }
+    .MCQ-box1{
+        height:700px;
+    }
+  }
+
+  @media screen and (max-width:800px) {
+    .MCQ-box2{
+        display: block;
+        margin: 2px;
+        height: auto;
+        width: 96vw;
+    }
+  }
+
+  @media screen and (max-width:500px) {
+    
+    .MCQ-submitButton{
+        display: block;
+        margin-block: 2px;
+    }
+} */
