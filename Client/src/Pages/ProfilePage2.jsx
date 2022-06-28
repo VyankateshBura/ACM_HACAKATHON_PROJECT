@@ -36,14 +36,16 @@ function ProfilePage2() {
       formData.append("prn",profileData.prn);
       formData.append("branch",profileData.branch);
       formData.append("year",profileData.year);
-      formData.append("dob",profileData.dob);
+      formData.append("dateofbirth",profileData.dob);
       formData.append("token",localStorage.getItem('token'));
-      const data = formData.getAll('profiles');
+   
+    console.log(localStorage.getItem("token"));
+    axios.post("http://localhost:5000/api/v1/upload/profile", formData,{
+      headers:{
+        token:localStorage.getItem("token")
+      }
       
-      console.log(data);
-      // console.log(profile);
-
-    axios.post("http://localhost:5000/api/v1/upload/profile", formData).then((res)=>{
+    }).then((res)=>{
       console.log(res)
       // localStorage.setItem(User_id,res.fileInfo.User_id);
     }).catch((err)=>console.log(err));

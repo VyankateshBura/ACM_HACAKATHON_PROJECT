@@ -1,11 +1,13 @@
 const cloudinary = require("cloudinary")
-
+const dotenv = require('dotenv')
+dotenv.config({path:'config/config.env'});
 Student = require("../../models/studentprofile");
 const jwt = require("jsonwebtoken");
 const catchAsyncError = require("../../middleware/catchAsyncError")
 const ErrorHandler = require("../../utility/errorHandler")
 exports.sendProfile = async (req, res, next) => {
-    const student = await Student.findById(req.student._id);
+    const data = jwt.verify(req.headers.token,process.env.JWT_SECRETE);
+    const student = await Student.findById(data.id);
     if (!student) {
         return next(new ErrorHandler("Student not recognize", 404))
     }
@@ -18,14 +20,14 @@ exports.sendProfile = async (req, res, next) => {
 
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
 
-    // const student = await Student.findById(req.student._id)
+    const student = await Student.findById(req.student._id)
 
-    // if (!student) {
-    //     res.status(201).json({
-    //         sucsse: false,
-    //         message: "Student not recognize"
-    //     })
-    // }
+    if (!student) {
+        res.status(201).json({
+            sucsse: false,
+            message: "Student not recognize"
+        })
+    }
     // if (req.body.photo != "") {
     // console.log(req.body.photo)
     // console.log("Logged out ");
@@ -63,7 +65,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     student.name = req.body.name || student.name;
     student.email = req.body.email || student.email;
     // student.photo = req.body.photo || student.photo;
-    student.signature = req.body.signature || student.signature;
+    // student.signature = req.body.signature || student.signature;
     student.prn = req.body.prn || student.prn;
     student.phonenumber = req.body.phonenumber || student.phonenumber;
     student.branch = req.body.branch || student.branch;

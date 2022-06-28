@@ -4,11 +4,7 @@ dotenv.config({path:'config/config.env'});
 exports.sendtoken = async (res, statuscode, student) => {
     token = student.getJWTToken();
     
-    res.status(statuscode).cookie("token", token,{
-        expires: new Date(2022, 11, 24, 10, 33, 30, 0),
-        secure: false, // set to true if your using https
-        httpOnly: true,
-      }).json({
+    res.status(statuscode).json({
         succses: true,
         student,
         token

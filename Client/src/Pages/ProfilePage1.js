@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import axios from 'axios';
 import "./ProfilePage1.css";
 import OptionBoxBlue from "../Components/OptionBoxBlue";
 import OptionBoxWhite from "../Components/OptionBoxWhite";
@@ -7,6 +8,17 @@ import Navbar2 from "../Components/Navbar2";
 import {Link} from "react-router-dom";
 function ProfilePage1() {
     const role=useLocation().state
+    const [profile,setProfile] = useState(null);
+    useEffect(()=>{
+        axios.get('http://localhost:5000/api/v1/studentprofile',{
+            headers:{
+                token:localStorage.getItem('token')
+            }
+        }).then((res)=>{
+            setProfile(res.data.student);
+            console.log(res)})
+        console.log(profile);
+    },[]);
     return (
         <>
         <div className="Profile-page">
@@ -24,14 +36,14 @@ function ProfilePage1() {
                                 <h3>Name</h3>
                             </div>
                             <div className="colIn">
-                            Name of Student
+                            {profile?profile.name:''}
                             </div>
                         </div>
                         <hr/>
                         <div className="col1">
                             <div className="colOut d-flex flex-row justify-content-sm-between">
                                 <h3>Photo</h3>
-                                <img style = {{width:'30%',height:"30%"}} src = "http://localhost:5000/api/v1/files/profile62b285c8ce12f106a9639134.jpg"/>
+                                <img style = {{width:'30%',height:"30%"}} src = {`http://localhost:5000/api/v1/files/profiles${profile?profile._id:''}1.jpg`}/>
                             </div>
                             <div className="colIn Photo">
 
@@ -41,7 +53,7 @@ function ProfilePage1() {
                         <div className="col1">
                             <div className="colOut d-flex flex-row justify-content-sm-between">
                                 <h3>Signature</h3>
-                                <img style = {{width:'30%',height:"30%"}} src = "http://localhost:5000/api/v1/files/profile62b285c8ce12f106a9639134.jpg"/>
+                                <img style = {{width:'30%',height:"30%"}} src =    {`http://localhost:5000/api/v1/files/profiles${profile?profile._id:''}2.jpg`}/>
                             </div>
                             <div className="colIn Photo">
                             </div>
@@ -52,7 +64,7 @@ function ProfilePage1() {
                                 <h3>E-mail</h3>
                             </div>
                             <div className="colIn">
-                                emai
+                            {profile?profile.email:''}
                             </div>
                         </div>
                         <hr/>
@@ -61,7 +73,7 @@ function ProfilePage1() {
                                 <h3>PRN</h3>
                             </div>
                             <div className="colIn">
-PRN
+                            {profile?profile.prn:''}
                             </div>
                         </div>
                         <hr/>
@@ -70,7 +82,7 @@ PRN
                                 <h3>Branch</h3>
                             </div>
                             <div className="colIn">
-#######333333333333333333388888888888888
+                            {profile?profile.branch:''}
                             </div>
                         </div>
                         <hr/>
@@ -79,7 +91,7 @@ PRN
                                 <h3>Year</h3>
                             </div>
                             <div className="colIn">
-####
+                            {profile?profile.year:''}
                             </div>
                         </div>
                         <hr/>
@@ -88,7 +100,7 @@ PRN
                                 <h3>Date Of Birth</h3>
                             </div>
                             <div className="colIn">
-                                    ###########
+                            {profile?profile.dateofbirth:''}
                             </div>
                         </div>
                         <hr/>

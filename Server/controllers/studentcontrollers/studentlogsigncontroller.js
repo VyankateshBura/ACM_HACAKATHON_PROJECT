@@ -5,21 +5,23 @@ const catchAsyncError = require("../../middleware/catchAsyncError");
 const ErrorHandler = require("../../utility/errorHandler");
 exports.studentsignup = catchAsyncError(async (req, res) => {
     const { name, email, password, prn, phoneNumber } = req.body;
+    const branch = '';
+    const year = '';
+    const dateofbirth = '';
+    const profile = '';
     const student = await Student.create({
         name, email, password,
-        photo: {
-            public_id: "123",
-            url: "321"
-        },
         prn,
-        phoneNumber
+        phoneNumber,
+        branch,year,dateofbirth,profile
     })
     sendtoken(res, 201, student);
 
 })
 exports.studentLogin = catchAsyncError(async (req, res, next) => {
     console.log(req.body);
-    // getting  details from request
+    try{
+         // getting  details from request
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({
@@ -45,6 +47,10 @@ exports.studentLogin = catchAsyncError(async (req, res, next) => {
         })
     }
     sendtoken(res, 201, student)
+    }catch(err){
+        console.log(err);
+    }
+   
 
 })
 exports.logout = catchAsyncError(async (req, res, next) => {

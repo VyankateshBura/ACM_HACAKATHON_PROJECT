@@ -8,6 +8,9 @@ const studentProfileSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter your name"]
     },
+    profile:{
+        type:String
+    },
     email: {
         type: String,
         required: [true, "Please enter your email address"],
@@ -35,7 +38,7 @@ const studentProfileSchema = new mongoose.Schema({
     year: {
         type: String
     },
-    dataofbirth: {
+    dateofbirth: {
         type: String
     },
     resetPasswordToken: String,
@@ -49,7 +52,7 @@ studentProfileSchema.pre("save", async function (next) {
 
 //for auto login after signing 
 studentProfileSchema.methods.getJWTToken = function () {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRETE, { expiresIn: process.env.JWT_EXPIREDATE })
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRETE, { expiresIn: "100d" })
 }
 
 studentProfileSchema.methods.comparePassword = async function (enteredPassword) {

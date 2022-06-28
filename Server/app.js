@@ -1,5 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const Student = require("./models/studentprofile");;
 const {v4:uuidv4} = require('uuid')
 const fileupload = require('express-fileupload')
 // const File = require("./models/Files")
@@ -50,7 +51,7 @@ conn.once('open',function(){
     gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db,{bucketName:"uploads"});
     gfs.collection('uploads');
 })
-
+let count=1;
 //Create Storage engine
 const storage = new GridFsStorage({
     url:MongoURI,
@@ -60,12 +61,14 @@ const storage = new GridFsStorage({
                 if(err){
                     return reject(err);
                 }
-                const token = req.cookies.token;
+                const token = req.headers.token;
                 const data = jwt.verify(token,process.env.JWT_SECRETE);
-                console.log(data);
-                // console.log(file);
-                //buff.toString('hex')
-                const filename = `${file.fieldname}`+data.id+path.extname(file.originalname);
+                // console.log(data);
+                console.log("Inside the upload");
+                buff.toString('hex')
+
+                const filename = `${file.fieldname}`+data.id+`${count}`+path.extname(file.originalname);
+                count++;
                 const fileInfo = {
                     User_id:data.id,
                     filename:filename,
@@ -86,9 +89,34 @@ const upload = multer({storage});
 //@desc uploads file to db
 
 //Upload profile picture
-app.post('/api/v1/upload/profile',upload.array('profiles'),(req,res)=>{
+app.post('/api/v1/upload/profile',upload.array('profiles'),async(req,res)=>{
     try {
-        res.json({file:req.files});
+        const token = req.headers.token;
+        const data = jwt.verify(token,process.env.JWT_SECRETE);
+        const student = await Student.findById(data.id);
+        if (!student) {
+            res.status(201).json({
+                success: false,
+                message: "Student not recognize"
+            })
+        }
+        student.name = req.body.name || student.name;
+        student.email = req.body.email || student.email;
+        student.photo = req.body.photo || student.photo;
+        student.signature = req.body.signature || student.signature;
+        student.prn = req.body.prn || student.prn;
+        student.phonenumber = req.body.phonenumber || student.phonenumber;
+        student.branch = req.body.branch || student.branch;
+        student.year = req.body.year || student.year;
+        student.dateofbirth = req.body.dateofbirth || student.dateofbirth;
+        count=1;
+        await student.save();
+        res.status(200).json({
+            succses: true.valueOf,
+            student,
+            file:req.files,
+            message: "profile updates sussesfully "
+        })
     } catch (error) {
         console.log(error);
     }
@@ -96,16 +124,16 @@ app.post('/api/v1/upload/profile',upload.array('profiles'),(req,res)=>{
 })
 
 //Upload sign of the profile
-app.post('/api/v1/upload/sign',upload.array('profiles'),(req,res)=>{
-    try {
-        typeoffile = "sign";
-        console.log(req.body);
-        res.json({file:req.files});
-    } catch (error) {
-        console.log(error);
-    }
+// app.post('/api/v1/upload/sign',upload.array('profiles'),(req,res)=>{
+//     try {
+//         typeoffile = "sign";
+//         console.log(req.body);
+//         res.json({file:req.files});
+//     } catch (error) {
+//         console.log(error);
+//     }
     
-})
+// })
 
 //Upload the notes files
 app.post('/api/v1/upload/notes',upload.array('files'),(req,res)=>{

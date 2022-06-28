@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import {useCookies} from 'react-cookie'
 import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import OptionBoxBlue from "./OptionBoxBlue";
@@ -8,6 +9,7 @@ import BlueButton from "./BlueButton";
 import "./SignupLogin.css";
 export default function SignUpLogin({role}){
     // console.log(role);
+    const [cookies, setCookie] = useCookies(['']);
     let navigate=useNavigate()
     const [formData1,setFormData1]=React.useState({
         "name":"",
@@ -37,17 +39,17 @@ export default function SignUpLogin({role}){
     console.log("Posted Data");
     if(role==="Student"){
         try{
-            data.prn = formData1.prn;
             const res = await axios
             .post(`http://localhost:5000/api/v1/studentsignup`,{
                 name:formData1.name,
+                prn:formData1.prn,
                 email:formData1.email,
                 password:formData1.password,
                 phoneNumber:formData1.mobile
                 
             })
             console.log(res);
-            
+            localStorage.setItem('token',res.data.token);
             // window.location.replace('/studentdashboard');
             navigate(`/studentdashboard/${role}`,{state:role});
             // res.data&&navigate("http://localhost:3000/studentdashboard");
@@ -66,6 +68,7 @@ export default function SignUpLogin({role}){
              
             })
             console.log(res)
+            localStorage.setItem('token',res.data.token);
             navigate(`/facultydashboard/${role}`,{state:role});
             // res.data && navigate("http://localhost:3000/facultydashboard")
         }catch(error){
@@ -90,6 +93,7 @@ export default function SignUpLogin({role}){
                       
                 })
                 console.log(res);
+               
                 localStorage.setItem('token',res.data.token);
                 navigate(`/studentdashboard/${role}`,{state:role});
                 // res.data&&navigate("http://localhost:3000/studentdashboard");
@@ -108,6 +112,7 @@ export default function SignUpLogin({role}){
                 
                 })
                 console.log(res);
+                localStorage.setItem('token',res.data.token);
                 navigate(`/facultydashboard/${role}`,{state:role});
                 // res.data && navigate("http://localhost:3000/facultydashboard")
             }catch(error){
