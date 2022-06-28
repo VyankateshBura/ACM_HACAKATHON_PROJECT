@@ -30,7 +30,9 @@ const corsOptions ={
 }
 
 app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(express.urlencoded({extended:true}))
 //MongoURI
+
 const MongoURI = process.env.MONGOHOST;
 
 //Create mongo Connection
@@ -41,7 +43,8 @@ const conn =  mongoose.createConnection(MongoURI, {
 
 //init gfs
 let gfs,gridFsBucket;
-
+let typeoffile = null;
+let token_id = null;
 conn.once('open',function(){
     gfs = Grid(conn.db,mongoose.mongo);
     gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db,{bucketName:"uploads"});
@@ -60,9 +63,11 @@ const storage = new GridFsStorage({
                 const token = req.cookies.token;
                 const data = jwt.verify(token,process.env.JWT_SECRETE);
                 console.log(data);
+                // console.log(file);
                 //buff.toString('hex')
-                const filename = "profile"+data.id+path.extname(file.originalname);
+                const filename = `${file.fieldname}`+data.id+path.extname(file.originalname);
                 const fileInfo = {
+                    User_id:data.id,
                     filename:filename,
                     bucketName:'uploads'
                 };
@@ -79,8 +84,21 @@ const upload = multer({storage});
 
 //@route POST/upload
 //@desc uploads file to db
-app.post('/api/v1/upload',upload.array('files'),(req,res)=>{
+
+//Upload profile picture
+app.post('/api/v1/upload/profile',upload.array('profiles'),(req,res)=>{
     try {
+        res.json({file:req.files});
+    } catch (error) {
+        console.log(error);
+    }
+    
+})
+
+//Upload sign of the profile
+app.post('/api/v1/upload/sign',upload.array('profiles'),(req,res)=>{
+    try {
+        typeoffile = "sign";
         console.log(req.body);
         res.json({file:req.files});
     } catch (error) {
@@ -88,6 +106,20 @@ app.post('/api/v1/upload',upload.array('files'),(req,res)=>{
     }
     
 })
+
+//Upload the notes files
+app.post('/api/v1/upload/notes',upload.array('files'),(req,res)=>{
+    try {
+        typeoffile = "notes";
+        console.log(req.body);
+        res.json({file:req.files});
+    } catch (error) {
+        console.log(error);
+    }
+    
+})
+
+
 
 //@route get /files
 //desc Display all files in json

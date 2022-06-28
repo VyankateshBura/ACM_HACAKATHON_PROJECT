@@ -1,6 +1,6 @@
 const { sendtoken } = require("../../utility/cockietoken");
 const { sendEmail } = require("../../utility/passwordResetEmail")
-Student = require("../../models/studentprofile");
+const Student = require("../../models/studentprofile");
 const catchAsyncError = require("../../middleware/catchAsyncError");
 const ErrorHandler = require("../../utility/errorHandler");
 exports.studentsignup = catchAsyncError(async (req, res) => {

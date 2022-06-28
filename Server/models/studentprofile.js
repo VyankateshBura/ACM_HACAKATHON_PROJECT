@@ -7,25 +7,6 @@ const studentProfileSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please enter your name"]
-    }
-    ,
-    photo: {
-        public_id: {
-            type: String
-
-        },
-        url: {
-            type: String
-        }
-    },
-    signature: {
-        public_id: {
-            type: String
-
-        },
-        url: {
-            type: String
-        }
     },
     email: {
         type: String,
@@ -39,7 +20,6 @@ const studentProfileSchema = new mongoose.Schema({
         required: [true, "Please enter password"]
 
     },
-
     prn: {
         type: String,
         required: true

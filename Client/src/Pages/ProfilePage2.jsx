@@ -8,59 +8,52 @@ import "../Components/BlueButton.css";
 import {Link} from "react-router-dom";
 function ProfilePage2() {
   const [profileData,setProfileData]=React.useState({"name":" ","email":"","prn":"","branch":"","year":0,"dob":""})
-  const [DataFiles,setDataFiles] = React.useState([]);
+  // const [DataFiles,setDataFiles] = React.useState([]);
   const [profile,setProfile] = React.useState(null);
   const [sign,setSign]=React.useState(null)
   // const[imgCollection,setimgCollection] = React.useState([]);
   
-  function handlesign(e){
-        if(e.target.files && e.target.files[0]){
-          // console.log(e.target.files[0]);
-          setDataFiles(DataFiles=>[...DataFiles,e.target.files[0]]);
-          // console.log(DataFiles);
-        // let p=e.target.files[0]
-        // setSign({sign:URL.createObjectURL(p)})
-    }
-  }
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setProfileData(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+    // console.log(profileData);
+};
 
-  function handleprofile(e){
- 
-    let formData = new FormData()
-    let file = e.target.files[0]
-    let filename = e.target.files[0].name
-
-    formData.append('file', file)
-    formData.append('filename', filename)
-
-    axios.post('user-settings/profile-picture', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    }).then(res=>{console.log(res)})  
-  }
   function submitProfile(e){
-    // e.preventDefault()
-    // let formData = new FormData();
+    e.preventDefault();
+    const formData = new FormData();
       // for (const key of Object.keys(DataFiles)) {
       //     formData.append('files', DataFiles[key])
       // }
-    //   formData.append('files',DataFiles[0]);
-    //   console.log(formData);
-    // axios.post("http://localhost:5000/api/v1/upload", {
-    //   mode: 'no-cors',
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //     "Accept": "application/json",
-    //     "type": "formData"
-    //   },
-    //   body:formData
+      formData.append("profiles",profile);
+      formData.append('profiles',sign);
+      // console.log(profileData);
+      formData.append("name",profileData.name);
+      formData.append("email",profileData.email);
+      formData.append("prn",profileData.prn);
+      formData.append("branch",profileData.branch);
+      formData.append("year",profileData.year);
+      formData.append("dob",profileData.dob);
+      formData.append("token",localStorage.getItem('token'));
+      const data = formData.getAll('profiles');
       
-    // }).then(function (res) {
+      console.log(data);
+      // console.log(profile);
+
+    axios.post("http://localhost:5000/api/v1/upload/profile", formData).then((res)=>{
+      console.log(res)
+      // localStorage.setItem(User_id,res.fileInfo.User_id);
+    }).catch((err)=>console.log(err));
+
+    
+    // .then(function (res) {
     //   if (res.ok) {
-    //     alert("Perfect! ");
+    //     alert("Profile Updated Successfully");
     //   } else if (res.status == 401) {
-    //     alert("Oops! ");
+    //     alert("Sorry we can't update profile now ");
     //   }
     // }, function (e) {
     //   alert("Error submitting form!");
@@ -95,7 +88,7 @@ function ProfilePage2() {
                     <h3>Name</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <input onChange={handleprofile} id="name" type="text" name="name" />
+                    <input onChange={handleChange}  id="name" type="text" name="name" />
                   </div>
                 </div>
                 <hr />
@@ -124,7 +117,7 @@ function ProfilePage2() {
                     <h3>E-mail</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <input onChange={handleprofile} id="email" type="email" />
+                    <input onChange={handleChange} name = "email" id="email" type="email" />
                   </div>
                 </div>
                 <hr />
@@ -133,7 +126,7 @@ function ProfilePage2() {
                     <h3>PRN</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <input onChange={handleprofile} id="prn" type="text" />
+                    <input onChange={handleChange} name = "prn" id="prn" type="text" />
                   </div>
                 </div>
                 <hr />
@@ -142,7 +135,7 @@ function ProfilePage2() {
                     <h3>Branch</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <select onChange={handleprofile} id="branch">
+                    <select onChange={handleChange} name = "branch" id="branch">
                       <option>Select branch</option>
                       <option value="Computer Science and Engineering">
                         Computer Science and Engineering
@@ -163,7 +156,7 @@ function ProfilePage2() {
                     <h3>Year</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <input onChange={handleprofile} id="year" type="number" />
+                    <input onChange={handleChange} name = "year" id="year" type="number" />
                   </div>
                 </div>
                 <hr />
@@ -172,7 +165,7 @@ function ProfilePage2() {
                     <h3>Date Of Birth</h3>
                   </div>
                   <div className="Edit-colIn">
-                    <input onChange={handleprofile} id="dob" type="Date" />
+                    <input onChange={handleChange} name = "dob" id="dob" type="Date" />
                   </div>
                 </div>
                 <hr />

@@ -29,9 +29,9 @@ function ProfilePage1() {
                         </div>
                         <hr/>
                         <div className="col1">
-                            <div className="colOut">
+                            <div className="colOut d-flex flex-row justify-content-sm-between">
                                 <h3>Photo</h3>
-                                <img src = "http://localhost:5000/api/v1/files/profile62b285c8ce12f106a9639134.jpg"/>
+                                <img style = {{width:'30%',height:"30%"}} src = "http://localhost:5000/api/v1/files/profile62b285c8ce12f106a9639134.jpg"/>
                             </div>
                             <div className="colIn Photo">
 
@@ -39,11 +39,11 @@ function ProfilePage1() {
                         </div>
                         <hr/>
                         <div className="col1">
-                            <div className="colOut">
+                            <div className="colOut d-flex flex-row justify-content-sm-between">
                                 <h3>Signature</h3>
+                                <img style = {{width:'30%',height:"30%"}} src = "http://localhost:5000/api/v1/files/profile62b285c8ce12f106a9639134.jpg"/>
                             </div>
                             <div className="colIn Photo">
-
                             </div>
                         </div>
                         <hr/>

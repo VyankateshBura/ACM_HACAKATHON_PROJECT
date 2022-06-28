@@ -47,6 +47,7 @@ export default function SignUpLogin({role}){
                 
             })
             console.log(res);
+            
             // window.location.replace('/studentdashboard');
             navigate(`/studentdashboard/${role}`,{state:role});
             // res.data&&navigate("http://localhost:3000/studentdashboard");
@@ -89,6 +90,7 @@ export default function SignUpLogin({role}){
                       
                 })
                 console.log(res);
+                localStorage.setItem('token',res.data.token);
                 navigate(`/studentdashboard/${role}`,{state:role});
                 // res.data&&navigate("http://localhost:3000/studentdashboard");
             }catch(error){

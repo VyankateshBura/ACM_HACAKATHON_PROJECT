@@ -31,5 +31,5 @@ cloudinary.config({
 
 let port = process.env.PORT;
 app.listen(port, function () {
-  console.log(`sever is running on port ${port}`);
+  console.log(`server is running on port ${port}`);
 });
