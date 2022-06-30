@@ -27,7 +27,7 @@ exports.isfacultyauthenticate = async (req, res, next) => {
     }
     req.token = token;
     decode = jwt.verify(token, process.env.JWT_SECRETE)
-    req.faculty = await Faculty.findById(decode.id);
+    req.faculty = await facultyProfile.findById(decode.id);
     // console.log(req.student)
     next();
 }

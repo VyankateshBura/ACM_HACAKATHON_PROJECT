@@ -2,6 +2,7 @@ const { sendtoken, sendtokenfaculty } = require("../../utility/cockietoken");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../../utility/passwordResetEmail")
 const facultyProfile = require("../../models/teacherprofile");
+const studentProfile = require("../../models/studentprofile");
 courseStudent = require("../../models/enrollstudent");
 const catchAsyncError = require("../../middleware/catchAsyncError")
 const ErrorHandler = require("../../utility/errorHandler")
@@ -94,6 +95,23 @@ exports.logout = catchAsyncError(async (req, res, next) => {
 //     }
 
 // }
+
+
+
+//Get All students in database
+exports.allstudents = catchAsyncError(async(req,res,next)=>{
+    try{
+        console.log("request for students");
+        const data = await studentProfile.find({});
+        res.status(200).json({
+            success:true,
+            data
+        })
+    }catch(err){
+        console.log(err);
+    }
+    
+})
 
 //create profile faculty 
 exports.sendProfile = catchAsyncError(async (req, res, next) => {

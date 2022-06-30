@@ -1,13 +1,15 @@
-
-Faculty = require("../../models/teacherprofile");
+const dotenv = require('dotenv')
+dotenv.config({path:'config/config.env'});
+facultyProfile = require("../../models/teacherprofile");
 ExamPaper = require("../../models/questionPapermodel")
 LiveExam = require("../../models/liveexamModel")
 const catchAsyncError = require("../../middleware/catchAsyncError")
 const ErrorHandler = require("../../utility/errorHandler")
 const jwt = require("jsonwebtoken");
 exports.sendSubject = catchAsyncError(async (req, res, next) => {
-    const faculty = await Faculty.findById(req.faculty._id);
-    // console.log(faculty);
+    console.log("Request for subject arrived");
+    const data = jwt.verify(req.headers.token,process.env.JWT_SECRETE)
+    const faculty = await facultyProfile.findById(data.id);
 
     if (!faculty) {
         return res.status(404).json({
@@ -18,11 +20,11 @@ exports.sendSubject = catchAsyncError(async (req, res, next) => {
         // return next(new ErrorHandler( "faculty not found",404));
     }
 
-    ({ coursestought } = faculty);
+    ({ courses } = faculty);
     res.status(201).json({
         succses: true,
         message: "subjects",
-        coursestought
+        courses
     })
 });
 
