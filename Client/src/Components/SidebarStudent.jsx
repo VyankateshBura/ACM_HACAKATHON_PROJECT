@@ -9,6 +9,7 @@ import { ReactComponent as ResultIcon } from "../Icons/result-icon.svg";
 import { ReactComponent as LogoutWIcon } from "../Icons/logout-icon-white.svg";
 import { ReactComponent as MenuIcon } from "../Icons/menu-icon-white.svg";
 function SidebarStudent({role}) {
+  console.log(role);
   const [sidebar,setSidebar]=React.useState(true)
   function showSidebar(){
     setSidebar((prevState)=>!prevState)
@@ -21,7 +22,7 @@ function SidebarStudent({role}) {
           <MenuIcon onClick={showSidebar}/>
         </div>
         <li>
-          <Link to="/studentdashboard">
+          <Link to={`/studentdashboard/${role}`}>
           <span className="options">
             <HomeIcon />
             <p>Dashboard</p>
@@ -29,7 +30,7 @@ function SidebarStudent({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/studentprofile" state={{role:{role}}}>
+          <Link to="/studentprofile" state={role}>
           <span className="options">
             <ProfileIcon />
             <p>Profile</p>
@@ -37,7 +38,7 @@ function SidebarStudent({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/notes" state={{role:{role}}}>
+          <Link to="/notes" state={role}>
           <span className="options">
             <NotesIcon />
             <p>Notes</p>
@@ -45,7 +46,7 @@ function SidebarStudent({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/examlogin" state={{role:{role}}}>
+          <Link to="/examlogin" state={role}>
           <span className="options">
             <ExamIcon />
             <p>Exam</p>
@@ -53,7 +54,7 @@ function SidebarStudent({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/results" state={{role:{role}}}>
+          <Link to="/results" state={role}>
           <span className="options">
             <ResultIcon />
             <p>Result</p>
@@ -61,7 +62,7 @@ function SidebarStudent({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/" state={{role:{role}}}>
+          <Link to="/" state={role}>
           <span className="options">
             <LogoutWIcon />
             <p>Logout</p>

@@ -1,43 +1,48 @@
-
-
 // User model
-const File = require('../../models/Files');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 
- 
-// const DIR = './public/';
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, DIR);
-//     },
-//     filename: (req, file, cb) => {
-//         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-//         cb(null, uuidv4() + '-' + fileName)
-//     }
-// });
-// var upload = multer({
-//     storage: storage,
-//     fileFilter: (req, file, cb) => {
-//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-//             cb(null, true);
-//         } else {
-//             cb(null, false);
-//             return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-//         }
-//     }
-// });
+const MongoURI = process.env.MONGOHOST;
 
+// Create mongo Connection
+const conn =  mongoose.createConnection(MongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+});
 
+// init gfs
+let gfs,gridFsBucket;
+conn.once('open',function(){
+    gfs = Grid(conn.db,mongoose.mongo);
+    gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db,{bucketName:"uploads"});
+    gfs.collection('uploads');
+})
 
-const getAllFiles =  (req, res, next) => {
-    console.log("Files sending");
-    File.find().then(data => {
-        res.status(200).json({
-            message: "User list retrieved successfully!",
-            users: data
-        });
-    });
-};
+const getFile =    async (req,res)=>{
+    try{
+        console.log(req.params.filename);
+        gfs.files.findOne({filename:req.params.filename}, async(err,file)=>{
+             //Check if files exist
+             if(!file || file.length === 0){
+                return res.status(404).json({
+                    err:"No file exist"
+                })
+            }
+    
+            //File exist
+            const readstream = await gridFsBucket.openDownloadStreamByName(file.filename);
+            readstream.pipe(res);
+            // return res.json(file);
+        })
+    }catch(err){
+        console.log(err);
+    }
+       
+    
+    }
 
 module.exports= {
-    getAllFiles
+    getFile
 }

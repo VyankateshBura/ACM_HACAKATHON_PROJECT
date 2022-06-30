@@ -7,7 +7,7 @@ const { addStudent } = require("../controllers/facultycontrollers/facultydashboa
 Router.route("/signup").post(facultysignup);
 Router.route("/login").post(facultyLogin)
 Router.route("/logout").get(isfacultyauthenticate, logout);
-Router.route("/profile/update").put(isfacultyauthenticate, updateFacultyPrfile)
+// Router.route("/profile/update").put(isfacultyauthenticate, updateFacultyPrfile)
 Router.route("/dashboard/:subject/").put(isfacultyauthenticate, addStudent)
 Router.route("/profile").get(isfacultyauthenticate, sendProfile)
 // Router.route("/setexam").get(isauthenticate,sendSubject)

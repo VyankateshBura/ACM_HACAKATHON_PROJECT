@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const studentProfile = require("../models/studentprofile")
+const facultyProfile = require("../models/teacherprofile");
 exports.isauthenticate = async (req, res, next) => {
     const token = req.headers.token;
     // console.log(token);
@@ -10,12 +12,12 @@ exports.isauthenticate = async (req, res, next) => {
     }
     req.token = token;
     decode = jwt.verify(token, process.env.JWT_SECRETE)
-    req.student = await Student.findById(decode.id);
+    req.student = await studentProfile.findById(decode.id);
     // console.log(req.student)
     next();
 }
 exports.isfacultyauthenticate = async (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.headers.token;
     // console.log(token);
     if (!token) {
         return res.status(200).json({

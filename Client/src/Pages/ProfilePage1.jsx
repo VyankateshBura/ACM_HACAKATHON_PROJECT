@@ -7,10 +7,11 @@ import { useLocation } from 'react-router-dom';
 import Navbar2 from "../Components/Navbar2";
 import {Link} from "react-router-dom";
 function ProfilePage1() {
-    const role=useLocation().state
+    const role=useLocation().state;
+    console.log(role);
     const [profile,setProfile] = useState(null);
     useEffect(()=>{
-        axios.get('http://localhost:5000/api/v1/studentprofile',{
+        axios.get('http://localhost:5000/api/v1/student/studentprofile',{
             headers:{
                 token:localStorage.getItem('token')
             }
@@ -19,15 +20,26 @@ function ProfilePage1() {
             console.log(res)})
         console.log(profile);
     },[]);
+    const [addcss,setaddcss] = useState("8vw");
+    function shift(value){
+        if(value==true){
+            console.log("Navbar active");
+            setaddcss("18vw");
+        }
+        else{
+            console.log("Navbar closed");
+            setaddcss("8vw"); 
+        }
+    }
     return (
         <>
         <div className="Profile-page">
-            <Navbar2 role={role.role.role}/>
-            <div className="Profile-outer-box">
+            <Navbar2 shift={shift} role={role}/>
+            <div className="Profile-outer-box" style={{marginLeft:`${addcss}`}}>
                 <div className="outer">
                     <div className="profile-button">
                        <OptionBoxBlue name="Profile"> </OptionBoxBlue>
-                        <Link to="/studentprofileedit"  state={{role:{role}}}><OptionBoxWhite name="Edit-Profile"></OptionBoxWhite></Link>
+                        <Link to="/studentprofileedit"  state={role}><OptionBoxWhite name="Edit-Profile"></OptionBoxWhite></Link>
 
                     </div>
                     <div className="mainPart">
@@ -41,9 +53,12 @@ function ProfilePage1() {
                         </div>
                         <hr/>
                         <div className="col1">
-                            <div className="colOut d-flex flex-row justify-content-sm-between">
+                            <div className="colOut mx-1 d-flex flex-row justify-content-sm-between ">
                                 <h3>Photo</h3>
-                                <img style = {{width:'30%',height:"30%"}} src = {`http://localhost:5000/api/v1/files/profiles${profile?profile._id:''}1.jpg`}/>
+                                {
+                                    profile&&
+                                <img className = "rounded-circle" style = {{marginLeft:"60vh",width:'30%',height:"50%"}} src = {`http://localhost:5000/api/v1/files/profiles${profile._id}1.jpg`}/>
+                                }
                             </div>
                             <div className="colIn Photo">
 
@@ -52,8 +67,10 @@ function ProfilePage1() {
                         <hr/>
                         <div className="col1">
                             <div className="colOut d-flex flex-row justify-content-sm-between">
-                                <h3>Signature</h3>
-                                <img style = {{width:'30%',height:"30%"}} src =    {`http://localhost:5000/api/v1/files/profiles${profile?profile._id:''}2.jpg`}/>
+                                <h3>Signature</h3>{
+                                    profile&&
+                                <img style = {{marginLeft:"55vh",width:'20vw',height:"10vh"}} src =    {`http://localhost:5000/api/v1/files/profiles${profile._id}2.jpg`}/>
+                                }
                             </div>
                             <div className="colIn Photo">
                             </div>

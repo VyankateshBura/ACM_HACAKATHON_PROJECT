@@ -1,39 +1,24 @@
 const { sendtoken, sendtokenfaculty } = require("../../utility/cockietoken");
+const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../../utility/passwordResetEmail")
-Faculty = require("../../models/teacherprofile");
+const facultyProfile = require("../../models/teacherprofile");
 courseStudent = require("../../models/enrollstudent");
 const catchAsyncError = require("../../middleware/catchAsyncError")
 const ErrorHandler = require("../../utility/errorHandler")
 exports.facultysignup = catchAsyncError(async (req, res) => {
     const { name, email, password, phoneNumber, coursestought } = req.body;
-    const faculty = await Faculty.create({
-        name, email, password,
-        photo: {
-            public_id: "123",
-            url: "321"
-        },
-
-        phoneNumber,
-        coursestought
+    const department = "";
+    const dateofbirth = "";
+    const faculty = await facultyProfile.create({
+        name, email, password,phoneNumber,department,dateofbirth
     })
-    faculty.coursestought.forEach(async course => {
-        const facultyClass = await courseStudent.findOne({ teacher: faculty._id, subject: course });
-        if (!facultyClass) {
-            courseStudent.create(
-                {
-                    subject: course,
-                    teacher: faculty._id
-                }
-            )
-        }
-    })
-
     sendtokenfaculty(res, 201, faculty)
 
 })
 
 exports.facultyLogin = catchAsyncError(async (req, res, next) => {
     // getting  details from request
+    console.log("Faculty Login");
     const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).json({
@@ -42,7 +27,7 @@ exports.facultyLogin = catchAsyncError(async (req, res, next) => {
         })
     }
     // find user with email
-    const faculty = await Faculty.findOne({ email }).select("+password");
+    const faculty = await facultyProfile.findOne({ email }).select("+password");
     if (!faculty) {
         return res.status(400).json({
             succses: false,
@@ -112,20 +97,21 @@ exports.logout = catchAsyncError(async (req, res, next) => {
 
 //create profile faculty 
 exports.sendProfile = catchAsyncError(async (req, res, next) => {
-    const faculty = await Faculty.findById(req.faculty._id);
+    const data = jwt.verify(req.headers.token,process.env.JWT_SECRETE);
+    const faculty = await facultyProfile.findById(data.id);
     if (!faculty) {
         return next(new ErrorHandler("Faculty not recognize", 404))
 
     }
     // console.log(decode.id);
     res.status(201).json({
-        sucsse: true,
+        success: true,
         faculty
     })
 })
 
 // update profile for faculty 
-exports.updateFacultyPrfile = catchAsyncError(async (req, res, next) => {
+exports.updateFacultyProfile = catchAsyncError(async (req, res, next) => {
 
     const { newcoursestought } = req.body;
     const doc = await Faculty.updateOne(

@@ -42,7 +42,7 @@ export default function Navbar2({role,shift}){
     // }
     return(
         <>
-        <nav className="navbar2">
+        <nav className="navbar2 fixed-top">
             <MenuIcon className="menu-icon" onClick={showSidebar}/>
             <div className="right-part">
             <ProfileIcon className="profile-icon"/>
@@ -52,7 +52,7 @@ export default function Navbar2({role,shift}){
             {/* <DropdownIcon className="dropdown-icon"/> */}
             </div>
         </nav>
-        {/* {displaySidebar()} */
+        {/* {displaySidebar()} */ 
 
             sidebar?(role==="Student"?<SidebarStudent role={role}/>:<SidebarFaculty role={role}/>):null
         }

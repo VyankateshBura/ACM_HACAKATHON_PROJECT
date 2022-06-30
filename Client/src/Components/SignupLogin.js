@@ -1,15 +1,14 @@
 import React from "react";
 import axios from 'axios';
 import {useCookies} from 'react-cookie'
-import { createRoutesFromChildren, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import OptionBoxBlue from "./OptionBoxBlue";
 import OptionBoxWhite from "./OptionBoxWhite";
-import BlueButton from "./BlueButton";
 import "./SignupLogin.css";
 export default function SignUpLogin({role}){
     // console.log(role);
-    const [cookies, setCookie] = useCookies(['']);
+
     let navigate=useNavigate()
     const [formData1,setFormData1]=React.useState({
         "name":"",
@@ -40,7 +39,7 @@ export default function SignUpLogin({role}){
     if(role==="Student"){
         try{
             const res = await axios
-            .post(`http://localhost:5000/api/v1/studentsignup`,{
+            .post(`http://localhost:5000/api/v1/student/studentsignup`,{
                 name:formData1.name,
                 prn:formData1.prn,
                 email:formData1.email,
@@ -86,7 +85,7 @@ export default function SignUpLogin({role}){
             try{
                 
                 const res = await axios
-                .post(`http://localhost:5000/api/v1/studentlogin`,{
+                .post(`http://localhost:5000/api/v1/student/studentlogin`,{
                    
                         email:formData2.email,
                         password:formData2.password

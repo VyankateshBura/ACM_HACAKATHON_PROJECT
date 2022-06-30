@@ -22,7 +22,7 @@ function SidebarFaculty({role}) {
           <MenuIcon onClick={showSidebar}/>
         </div>
         <li>
-          <Link to="/facultydashboard">
+          <Link to={`/facultydashboard/${role}`}>
           <span className="options">
             <HomeIcon />
             <p>Dashboard</p>
@@ -30,7 +30,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/facultyprofileedit">
+          <Link to="/facultyprofile" state={role}>
           <span className="options">
             <ProfileIcon />
             <p>Profile</p>
@@ -38,7 +38,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/enroll">
+          <Link to="/enroll" state={role}>
           <span className="options">
             <EnrollIcon />
             <p>Enroll Students</p>
@@ -46,7 +46,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/uploadnotes">
+          <Link to="/uploadnotes" state={role}>
           <span className="options">
             <NotesIcon />
             <p>Upload Notes</p>
@@ -54,7 +54,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/setexampaper">
+          <Link to="/setexampaper" state={role}>
           <span className="options">
             <ExamIcon />
             <p>Set Exam</p>
@@ -62,7 +62,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/checkpaper">
+          <Link to="/checkpaper" state={role}>
           <span className="options">
             <ResultIcon />
             <p>Check Paper</p>
@@ -70,7 +70,7 @@ function SidebarFaculty({role}) {
           </Link>
         </li>
         <li>
-          <Link to="/" state={{role:{role}}}>
+          <Link to="/" state={role}>
           <span className="options">
             <LogoutWIcon />
             <p>Logout</p>

@@ -38,21 +38,24 @@ const FacultyProfileSchema = new mongoose.Schema({
         select: false,
         required: [true, "Please enter password"]
     },
-    coursestought:[
-        {
-            type:String
-        }
+    department: {
+        type: String,
+
+    },
+    courses:[
+       {
+        type:String
+       }
     ],
     phoneNumber: {
         type: String,
-        required: true
     },
     branch: {
         type: String,
 
     },
   
-    dataofbirth: {
+    dateofbirth: {
         type: String
     },
     resetPasswordToken: String,

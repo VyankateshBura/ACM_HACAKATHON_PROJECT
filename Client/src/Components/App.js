@@ -22,10 +22,12 @@ import NotesPageStudent from "../Pages/NotesPageStudent";
 import ViewFile from "../Pages/ViewFile";
 import ProfilePage2 from "../Pages/ProfilePage2";
 import ProfilePage1 from "../Pages/ProfilePage1";
+import ProfilePage1Fac from "../Pages/ProfilePage1Fac";
 import ProfilePage2Fac from "../Pages/ProfilePage2Fac";
 import CheckQue from "../Pages/CheckQue";
 import ExamLogin from "../Pages/ExamLogin";
 import LiveExam from "../Pages/LiveExam";
+import EachSubjectNotes from "../Pages/EachSubjectNotes";
 function App() {
   return (
     <div className="App"> 
@@ -50,9 +52,11 @@ function App() {
       <Route exact path='/viewpdf' element={<ViewPdf/>}/>
       <Route exact path="/uploadnotes" element={<NotesPageFaculty/>}/>
       <Route exact path="/notes" element={<NotesPageStudent/>}/>
+      <Route exact path="/notes/:subject" element={<EachSubjectNotes/>}/>
       <Route exact path="/viewfile" element={<ViewFile/>}/>
       <Route exact path="/studentprofileedit" element={<ProfilePage2/>}/>
       <Route exact path="/studentprofile" element={<ProfilePage1/>}/>
+      <Route exact path="/facultyprofile" element={<ProfilePage1Fac/>}/>
       <Route exact path="/facultyprofileedit" element={<ProfilePage2Fac/>}/>
       <Route exact path="/checkque" element={<CheckQue/>}/>
       <Route exact path="/examlogin" element={<ExamLogin/>}/>

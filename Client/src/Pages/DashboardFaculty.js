@@ -1,4 +1,5 @@
 import './Dashboard.css';
+import React,{useState} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import Navbar2 from '../Components/Navbar2';
 import {ReactComponent as LiveExamIcon} from "../Icons/live-exam-icon.svg";
@@ -6,12 +7,22 @@ import {ReactComponent as UpcomingExamsIcon} from "../Icons/upcoming-exam-icon.s
 import {ReactComponent as CalendarIcon} from "../Icons/calendar-icon.svg";
 import {ReactComponent as ListIcon} from "../Icons/list-icon.svg";
 function DashboardFaculty(){
-    
+    const [addcss,setaddcss] = useState("8vw");
+    function shift(value){
+        if(value==true){
+            console.log("Navbar active");
+            setaddcss("13vw");
+        }
+        else{
+            console.log("Navbar closed");
+            setaddcss("8vw"); 
+        }
+    }
     return(
     <>
     <div className='page'>
-    <Navbar2 role="Faculty"/>
-    <div className='outer-box'>
+    <Navbar2 shift = {shift} role="Faculty"/>
+    <div className='outer-box'style={{marginLeft:`${addcss}`}}>
     <div className='dashboard-title'><p className='dashboard-name'>Dashboard</p></div>
         <h2>Menu Fields : </h2>
         <h3 className='headd'>Profile:-</h3>

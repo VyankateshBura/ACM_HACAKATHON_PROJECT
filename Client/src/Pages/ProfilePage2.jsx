@@ -5,13 +5,14 @@ import OptionBoxBlue from "../Components/OptionBoxBlue";
 import OptionBoxWhite from "../Components/OptionBoxWhite";
 import Navbar2 from "../Components/Navbar2";
 import "../Components/BlueButton.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate,useLocation} from "react-router-dom";
 function ProfilePage2() {
-  const [profileData,setProfileData]=React.useState({"name":" ","email":"","prn":"","branch":"","year":0,"dob":""})
-  // const [DataFiles,setDataFiles] = React.useState([]);
+  let navigate = useNavigate();
+  let role = useLocation().state;
+  // console.log(role);
+  const [profileData,setProfileData]=React.useState({"name":"","email":"","prn":"","branch":"","year":'',"dob":""})
   const [profile,setProfile] = React.useState(null);
-  const [sign,setSign]=React.useState(null)
-  // const[imgCollection,setimgCollection] = React.useState([]);
+  const [sign,setSign]=React.useState(null);
   
   const handleChange = e => {
     const { name, value } = e.target;
@@ -25,12 +26,8 @@ function ProfilePage2() {
   function submitProfile(e){
     e.preventDefault();
     const formData = new FormData();
-      // for (const key of Object.keys(DataFiles)) {
-      //     formData.append('files', DataFiles[key])
-      // }
       formData.append("profiles",profile);
       formData.append('profiles',sign);
-      // console.log(profileData);
       formData.append("name",profileData.name);
       formData.append("email",profileData.email);
       formData.append("prn",profileData.prn);
@@ -39,39 +36,21 @@ function ProfilePage2() {
       formData.append("dateofbirth",profileData.dob);
       formData.append("token",localStorage.getItem('token'));
    
-    console.log(localStorage.getItem("token"));
-    axios.post("http://localhost:5000/api/v1/upload/profile", formData,{
+    console.log(formData.getAll('name'));
+    console.log(formData.getAll('year'));
+    console.log(formData.getAll('branch'));
+    console.log(formData.getAll('email'));
+    console.log(formData.getAll('dateofbirth'));
+    console.log(formData.getAll('prn'));
+    axios.post("http://localhost:5000/api/v1/student/profile/update", formData,{
       headers:{
         token:localStorage.getItem("token")
       }
       
     }).then((res)=>{
-      console.log(res)
-      // localStorage.setItem(User_id,res.fileInfo.User_id);
+      console.log(res);
+      navigate(`/studentprofile`,{state:role});
     }).catch((err)=>console.log(err));
-
-    
-    // .then(function (res) {
-    //   if (res.ok) {
-    //     alert("Profile Updated Successfully");
-    //   } else if (res.status == 401) {
-    //     alert("Sorry we can't update profile now ");
-    //   }
-    // }, function (e) {
-    //   alert("Error submitting form!");
-    // });
-    // console.log(profileData);
-    // console.log(DataFiles);
-    // const data = {
-    //   files:DataFiles,
-    //   profiledata:profileData
-    // }
-    // console.log(data);
-    // const res = await axios.post("http://localhost:5000/api/v1/upload", {
-    //   contentType:"multi"
-    //   body:formData
-    // })
-    // console.log(res);
   }
   return (
     <>
@@ -80,7 +59,7 @@ function ProfilePage2() {
         <div className="Edit-Profile-outer-box">
           <div className="Edit-outer">
             <div className="profile-button">
-              <Link to="/profile"><span><div><OptionBoxWhite name="Profile"> </OptionBoxWhite></div></span></Link>
+              <Link to="/studentprofile"><span><div><OptionBoxWhite name="Profile"> </OptionBoxWhite></div></span></Link>
               <span><div><OptionBoxBlue name="Edit-Profile"></OptionBoxBlue></div></span>
             </div>
             <div className="Edit-mainPart" >

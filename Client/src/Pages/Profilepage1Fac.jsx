@@ -1,19 +1,46 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "./ProfilePage1.css";
+import Bluebutton from "../Components/BlueButton"
+import axios from 'axios';
 import OptionBoxBlue from "../Components/OptionBoxBlue";
 import OptionBoxWhite from "../Components/OptionBoxWhite";
 import Navbar2 from "../Components/Navbar2";
-import {Link} from "react-router-dom";
+import {Link,useLocation} from "react-router-dom";
 function ProfilePage1Fac() {
+    const role=useLocation().state;
+    console.log(role);
+    const [profile,setProfile] = useState(null);
+    useEffect(()=>{
+        axios.get('http://localhost:5000/api/v1/faculty/profile',{
+            headers:{
+                token:localStorage.getItem('token')
+            }
+        }).then((res)=>{
+            setProfile(res.data.faculty);
+            console.log(res)})
+        console.log(profile);
+    },[]);
+    const [addcss,setaddcss] = useState("8vw");
+    function shift(value){
+        if(value==true){
+            console.log("Navbar active");
+            setaddcss("18vw");
+        }
+        else{
+            console.log("Navbar closed");
+            setaddcss("8vw"); 
+        }
+    }
+
     return (
         <>
         <div className="Profile-page">
-            <Navbar2 />
-            <div className="Profile-outer-box">
+            <Navbar2 shift={shift} role={role}/>
+            <div className="Profile-outer-box"style={{marginLeft:`${addcss}`}}>
                 <div className="outer">
                     <div className="profile-button">
                        <OptionBoxBlue name="Profile"> </OptionBoxBlue>
-                        <Link to="/facultyprofileedit"><OptionBoxWhite name="Edit-Profile"></OptionBoxWhite></Link>
+                        <Link to="/facultyprofileedit" state={role}><OptionBoxWhite name="Edit-Profile"></OptionBoxWhite></Link>
 
                     </div>
                     <div className="mainPart">
@@ -22,13 +49,17 @@ function ProfilePage1Fac() {
                                 <h3>Name</h3>
                             </div>
                             <div className="colIn">
-                            Name of Student
+                            {profile?profile.name:''}
                             </div>
                         </div>
                         <hr/>
                         <div className="col1">
                             <div className="colOut">
                                 <h3>Photo</h3>
+                                {
+                                    profile&&
+                                <img className = "rounded-circle" style = {{marginLeft:"60vh",width:'30%',height:"50%"}} src = {`http://localhost:5000/api/v1/files/profiles${profile._id}1.jpg`}/>
+                                }
                             </div>
                             <div className="colIn Photo">
 
@@ -38,6 +69,10 @@ function ProfilePage1Fac() {
                         <div className="col1">
                             <div className="colOut">
                                 <h3>Signature</h3>
+                                {
+                                    profile&&
+                                <img style = {{marginLeft:"55vh",width:'20vw',height:"10vh"}} src =    {`http://localhost:5000/api/v1/files/profiles${profile._id}2.jpg`}/>
+                                }
                             </div>
                             <div className="colIn Photo">
 
@@ -49,7 +84,7 @@ function ProfilePage1Fac() {
                                 <h3>E-mail</h3>
                             </div>
                             <div className="colIn">
-                                emai
+                            {profile?profile.email:''}
                             </div>
                         </div>
                         <hr/>
@@ -58,7 +93,7 @@ function ProfilePage1Fac() {
                                 <h3>Department</h3>
                             </div>
                             <div className="colIn">
-#######333333333333333333388888888888888
+                            {profile?profile.department:''}
                             </div>
                         </div>
                         <hr/>
@@ -67,7 +102,7 @@ function ProfilePage1Fac() {
                                 <h3>Date Of Birth</h3>
                             </div>
                             <div className="colIn">
-                                    ###########
+                            {profile?profile.dateofbirth:''}
                             </div>
                         </div>
                         <hr/>
@@ -76,7 +111,19 @@ function ProfilePage1Fac() {
                                 <h3>Courses</h3>
                             </div>
                             <div className="colIn">
-#######333333333333333333388888888888888
+                            {profile &&
+                                
+                                    profile.courses.map((item,key)=>{
+                                        return(
+                                            <div key={key}>
+                                                <Bluebutton title={item}/>
+                                                <br></br>
+                                                <br></br>
+                                            </div>                                            
+                                        )
+                                    })
+                                
+                            }
                             </div>
                         </div>
                         <hr/>

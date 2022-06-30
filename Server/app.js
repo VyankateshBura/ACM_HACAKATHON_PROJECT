@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const Student = require("./models/studentprofile");;
+const studentProfile = require("./models/studentprofile");
+const facultyProfile = require("./models/teacherprofile");
 const {v4:uuidv4} = require('uuid')
 const fileupload = require('express-fileupload')
 // const File = require("./models/Files")
@@ -15,8 +16,6 @@ const methodOverride = require('method-override');
 const dotenv = require('dotenv')
 dotenv.config({path:'config/config.env'});
 const app = express();
-app.use(express.json());
-app.use(cookieParser());
 const student = require("./routers/studentrouter");
 const faculty = require("./routers/facultyRouter");
 const Files = require("./routers/UploadFile");
@@ -29,20 +28,21 @@ const corsOptions ={
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }
-
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.urlencoded({extended:true}))
 //MongoURI
 
 const MongoURI = process.env.MONGOHOST;
 
-//Create mongo Connection
+// Create mongo Connection
 const conn =  mongoose.createConnection(MongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
 });
 
-//init gfs
+// init gfs
 let gfs,gridFsBucket;
 let typeoffile = null;
 let token_id = null;
@@ -52,7 +52,7 @@ conn.once('open',function(){
     gfs.collection('uploads');
 })
 let count=1;
-//Create Storage engine
+// Create Storage engine
 const storage = new GridFsStorage({
     url:MongoURI,
     file:(req,file)=>{
@@ -82,30 +82,31 @@ const storage = new GridFsStorage({
 const upload = multer({storage});
 
 
-//@route GET
-//@desc loads form
+// @route GET
+// @desc loads form
 
-//@route POST/upload
-//@desc uploads file to db
+// @route POST/upload
+// @desc uploads file to db
 
-//Upload profile picture
-app.post('/api/v1/upload/profile',upload.array('profiles'),async(req,res)=>{
+// Update the student profile
+app.post('/api/v1/student/profile/update',upload.array('profiles'),async(req,res)=>{
     try {
         const token = req.headers.token;
         const data = jwt.verify(token,process.env.JWT_SECRETE);
-        const student = await Student.findById(data.id);
+        const student = await studentProfile.findById(data.id);
         if (!student) {
             res.status(201).json({
                 success: false,
                 message: "Student not recognize"
             })
         }
+        console.log(req.body);
         student.name = req.body.name || student.name;
         student.email = req.body.email || student.email;
         student.photo = req.body.photo || student.photo;
         student.signature = req.body.signature || student.signature;
         student.prn = req.body.prn || student.prn;
-        student.phonenumber = req.body.phonenumber || student.phonenumber;
+        student.phoneNumber = req.body.phoneNumber || student.phoneNumber;
         student.branch = req.body.branch || student.branch;
         student.year = req.body.year || student.year;
         student.dateofbirth = req.body.dateofbirth || student.dateofbirth;
@@ -123,10 +124,58 @@ app.post('/api/v1/upload/profile',upload.array('profiles'),async(req,res)=>{
     
 })
 
-//Upload sign of the profile
-// app.post('/api/v1/upload/sign',upload.array('profiles'),(req,res)=>{
+// Update the faculty profile
+
+app.post('/api/v1/faculty/profile/update',upload.array('profiles'),async(req,res)=>{
+   try {
+    const { coursetaught,token } = req.body;
+    const courses = coursetaught.split(',');
+    const data = jwt.verify(token,process.env.JWT_SECRETE);
+    const doc = await facultyProfile.updateOne(
+        { _id: data.id },
+        ({ $addToSet: { courses: { $each: courses } } })
+    )
+    const faculty = await facultyProfile.findById(data.id)
+
+    if (!faculty) {
+        return next(new ErrorHandler("Faculty not recognize", 404))
+    }
+    if(courses.length>1){
+        faculty.courses.forEach(async course => {
+            const facultyClass = await courseStudent.findOne({ teacher: data.id, subject: course });
+            if (!facultyClass) {
+                courseStudent.create(
+                    {
+                        subject: course,
+                        teacher: data.id
+                    }
+                )
+            }
+        })
+    }
+    
+
+    faculty.name = req.body.name || faculty.name;
+    faculty.email = req.body.email || faculty.email;
+    faculty.department = req.body.department || faculty.department;
+    faculty.dateofbirth = req.body.dateofbirth || faculty.dateofbirth;
+    await faculty.save();
+
+    res.status(200).json({
+        success: true,
+        faculty,
+        message: "profile updates sussesfully ", 
+    })
+  } catch (error) {
+      console.log(error);
+  }
+    
+})
+
+//Upload the notes files
+// app.post('/api/v1/upload/notes',upload.array('files'),(req,res)=>{
 //     try {
-//         typeoffile = "sign";
+//         typeoffile = "notes";
 //         console.log(req.body);
 //         res.json({file:req.files});
 //     } catch (error) {
@@ -135,39 +184,27 @@ app.post('/api/v1/upload/profile',upload.array('profiles'),async(req,res)=>{
     
 // })
 
-//Upload the notes files
-app.post('/api/v1/upload/notes',upload.array('files'),(req,res)=>{
-    try {
-        typeoffile = "notes";
-        console.log(req.body);
-        res.json({file:req.files});
-    } catch (error) {
-        console.log(error);
-    }
-    
-})
-
 
 
 //@route get /files
 //desc Display all files in json
-app.get('/api/v1/files',(req,res)=>{
-    gfs.files.find().toArray((err,files)=>{
-        //Check if files exist
-        if(!files || files.length === 0){
-            return res.status(404).json({
-                err:"No files exist"
-            })
-        }
-        //Files exist
-        return res.json(files);
+// app.get('/api/v1/files',(req,res)=>{
+//     gfs.files.find().toArray((err,files)=>{
+//         //Check if files exist
+//         if(!files || files.length === 0){
+//             return res.status(404).json({
+//                 err:"No files exist"
+//             })
+//         }
+//         //Files exist
+//         return res.json(files);
 
-    })
-})
+//     })
+// })
 
 //Getting a single file
 //@route get /files/:filename
-//desc Display single file in json
+// //desc Display single file in json
 app.get('/api/v1/files/:filename',(req,res)=>{
     gfs.files.findOne({filename:req.params.filename},(err,file)=>{
          //Check if files exist
@@ -186,28 +223,28 @@ app.get('/api/v1/files/:filename',(req,res)=>{
 })
 
 
-//@route get /image/:filename
-//desc Display image
-app.get('/image/:filename',(req,res)=>{
-    gfs.files.findOne({filename:req.params.filename},(err,file)=>{
-         //Check if files exist
-         if(!file || file.length === 0){
-            return res.status(404).json({
-                err:"No file exist"
-            })
-        }
-        //Check if image
-        if(file.contentType === 'image/jpeg'||file.contentType === 'image/png'||file.contentType === 'image/jpg'){
-            //Read Output to Browser
-            const readstream = gridFsBucket.openDownloadStreamByName(file.filename);
-            readstream.pipe(res);
-        }else{
-            res.status(404).json({err:"Not an image"});
-        }
+// //@route get /image/:filename
+// //desc Display image
+// app.get('/image/:filename',(req,res)=>{
+//     gfs.files.findOne({filename:req.params.filename},(err,file)=>{
+//          //Check if files exist
+//          if(!file || file.length === 0){
+//             return res.status(404).json({
+//                 err:"No file exist"
+//             })
+//         }
+//         //Check if image
+//         if(file.contentType === 'image/jpeg'||file.contentType === 'image/png'||file.contentType === 'image/jpg'){
+//             //Read Output to Browser
+//             const readstream = gridFsBucket.openDownloadStreamByName(file.filename);
+//             readstream.pipe(res);
+//         }else{
+//             res.status(404).json({err:"Not an image"});
+//         }
        
-    })
+//     })
 
-})
+// })
 
 
 
@@ -260,8 +297,8 @@ app.get('/image/:filename',(req,res)=>{
 // })
 
 //Rest of code
-app.use(fileupload())
-app.use("/api/v1", student);
+app.use("/api/v1",Files);
+app.use("/api/v1/student", student);
 app.use("/api/v1/faculty", faculty);  
 app.use("/api/v1/faculty/examination", examination);
 // app.use("/api/v1/files", Files);
