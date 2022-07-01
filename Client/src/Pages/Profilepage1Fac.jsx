@@ -7,8 +7,9 @@ import OptionBoxWhite from "../Components/OptionBoxWhite";
 import Navbar2 from "../Components/Navbar2";
 import {Link,useLocation} from "react-router-dom";
 function ProfilePage1Fac() {
+
     const role=useLocation().state;
-    console.log(role);
+
     const [profile,setProfile] = useState(null);
     useEffect(()=>{
         axios.get('http://localhost:5000/api/v1/faculty/profile',{
@@ -16,10 +17,14 @@ function ProfilePage1Fac() {
                 token:localStorage.getItem('token')
             }
         }).then((res)=>{
+            res.data.faculty.courses = res.data.faculty.courses.filter(function(entry) { return entry.trim() != ''; });
+            console.log([...res.data.faculty.courses])
             setProfile(res.data.faculty);
-            console.log(res)})
-        console.log(profile);
-    },[]);
+            
+        })
+        },[]);
+
+    console.log(profile);
     const [addcss,setaddcss] = useState("8vw");
     function shift(value){
         if(value==true){
@@ -31,11 +36,12 @@ function ProfilePage1Fac() {
             setaddcss("8vw"); 
         }
     }
-
+    
+    
     return (
         <>
         <div className="Profile-page">
-            <Navbar2 shift={shift} role={role}/>
+            <Navbar2 name = {profile?profile.name:null}shift={shift} role={role}/>
             <div className="Profile-outer-box"style={{marginLeft:`${addcss}`}}>
                 <div className="outer">
                     <div className="profile-button">
@@ -58,7 +64,7 @@ function ProfilePage1Fac() {
                                 <h3>Photo</h3>
                                 {
                                     profile&&
-                                <img className = "rounded-circle" style = {{marginLeft:"60vh",width:'30%',height:"50%"}} src = {`http://localhost:5000/api/v1/files/profiles${profile._id}1.jpg`}/>
+                                <img className = "rounded-circle" style = {{marginLeft:"32vw",width:'10vw',height:"20vh",boxShadow:'0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} src = {`http://localhost:5000/api/v1/files/profiles${profile._id}1.jpg`}/>
                                 }
                             </div>
                             <div className="colIn Photo">
@@ -71,7 +77,7 @@ function ProfilePage1Fac() {
                                 <h3>Signature</h3>
                                 {
                                     profile&&
-                                <img style = {{marginLeft:"55vh",width:'20vw',height:"10vh"}} src =    {`http://localhost:5000/api/v1/files/profiles${profile._id}2.jpg`}/>
+                                <img style = {{marginLeft:"32vw",width:'20vw',height:"10vh",boxShadow:'0 6px 20px 0 rgba(0, 0, 0, 0.19)'}} src =    {`http://localhost:5000/api/v1/files/profiles${profile._id}2.jpg`}/>
                                 }
                             </div>
                             <div className="colIn Photo">
@@ -111,9 +117,7 @@ function ProfilePage1Fac() {
                                 <h3>Courses</h3>
                             </div>
                             <div className="colIn">
-                            {profile &&
-                                
-                                    profile.courses.map((item,key)=>{
+                            {profile ?profile.courses.map((item,key)=>{
                                         return(
                                             <div key={key}>
                                                 <Bluebutton title={item}/>
@@ -121,9 +125,9 @@ function ProfilePage1Fac() {
                                                 <br></br>
                                             </div>                                            
                                         )
-                                    })
+                                    }):''
                                 
-                            }
+                                }
                             </div>
                         </div>
                         <hr/>

@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
+import userContext from '../Context/User/UserContext';
 import './Dashboard.css';
 import Navbar2 from '../Components/Navbar2';
 import {Link, useLocation} from 'react-router-dom';
@@ -6,12 +7,15 @@ import {ReactComponent as LiveExamIcon} from "../Icons/live-exam-icon.svg";
 import {ReactComponent as UpcomingExamsIcon} from "../Icons/upcoming-exam-icon.svg";
 import {ReactComponent as NotesIcon} from "../Icons/note-icon-blue.svg";
 import {ReactComponent as ListIcon} from "../Icons/list-icon.svg";
-function DashboardStundent(){
+function DashboardStudent(){
+    const user = useContext(userContext);
+    user.setuser('omkar');
+    console.log(user);
     const [addcss,setaddcss] = useState("8vw");
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("13vw");
+            setaddcss("18vw");
         }
         else{
             console.log("Navbar closed");
@@ -20,6 +24,7 @@ function DashboardStundent(){
     }
     return(
     <>
+
     <div className='page'>
     <Navbar2 shift = {shift}role="Student"/>
     <div className='outer-box' style={{marginLeft:`${addcss}`}}>
@@ -50,4 +55,4 @@ function DashboardStundent(){
     </>
     )
 }
-export default DashboardStundent;
+export default DashboardStudent;

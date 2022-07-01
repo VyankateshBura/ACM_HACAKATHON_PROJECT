@@ -1,6 +1,8 @@
 .toggle-outer-box{
-    width:144px;
-    height:52px;
+    width:fit-content;
+    height:fit-content;
+    padding: 8px;
+    border-radius: 10px;
     border: none;
     box-shadow: 2px 2px 4px rgb(177, 177, 177);
     background-color: #282b77;
@@ -11,8 +13,8 @@
     padding-right: 7px; */
 }
 .toggle-inner-box{
-    width:130px;
-    height: 40px;
+    width:fit-content;
+    height: fit-content;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 2px 4px inset rgb(177, 177, 177);

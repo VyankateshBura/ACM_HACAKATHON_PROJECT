@@ -11,7 +11,7 @@ function DashboardFaculty(){
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("13vw");
+            setaddcss("18vw");
         }
         else{
             console.log("Navbar closed");
@@ -22,8 +22,8 @@ function DashboardFaculty(){
     <>
     <div className='page'>
     <Navbar2 shift = {shift} role="Faculty"/>
-    <div className='outer-box'style={{marginLeft:`${addcss}`}}>
-    <div className='dashboard-title'><p className='dashboard-name'>Dashboard</p></div>
+    <div className='outer-box'style={{marginLeft:`${addcss}`,width:'fit-content',height:'fit-content'}}>
+    <div className='dashboard-title'><p className='dashboard-name' >Dashboard</p></div>
         <h2>Menu Fields : </h2>
         <h3 className='headd'>Profile:-</h3>
         <div className='text-field'>

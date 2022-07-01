@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import {Link, useLocation} from 'react-router-dom'
 import './EnrollStudent.css';
+import Cards from '../Components/Cards';
 import Navbar2 from '../Components/Navbar2';
 import OptionBoxBlue from '../Components/OptionBoxBlue';
 import OptionBoxWhite from '../Components/OptionBoxWhite';
@@ -43,7 +44,7 @@ export default function EnrollStudent(){
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("18vw");
+            setaddcss("19vw");
         }
         else{
             console.log("Navbar closed");

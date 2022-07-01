@@ -6,7 +6,7 @@ import "./SubjectNotes.css"
 
 const SubjectNotes = (props) => {
   const role=useLocation().state;
-  console.log(role+"in subject notes");
+  console.log(role);
   return (
     <div className="">
         <div className="col "data-aos="flip-left"data-aos-duration="1500"style={{width:"35vh",height:"35vh",margin:"5vh"}}>

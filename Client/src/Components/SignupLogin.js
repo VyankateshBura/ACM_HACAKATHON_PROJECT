@@ -49,6 +49,7 @@ export default function SignUpLogin({role}){
             })
             console.log(res);
             localStorage.setItem('token',res.data.token);
+            localStorage.setItem('name',res.data.student.name);
             // window.location.replace('/studentdashboard');
             navigate(`/studentdashboard/${role}`,{state:role});
             // res.data&&navigate("http://localhost:3000/studentdashboard");
@@ -68,6 +69,7 @@ export default function SignUpLogin({role}){
             })
             console.log(res)
             localStorage.setItem('token',res.data.token);
+            localStorage.setItem('name',res.data.faculty.name);
             navigate(`/facultydashboard/${role}`,{state:role});
             // res.data && navigate("http://localhost:3000/facultydashboard")
         }catch(error){
@@ -92,8 +94,8 @@ export default function SignUpLogin({role}){
                       
                 })
                 console.log(res);
-               
                 localStorage.setItem('token',res.data.token);
+                localStorage.setItem('name',res.data.student.name);
                 navigate(`/studentdashboard/${role}`,{state:role});
                 // res.data&&navigate("http://localhost:3000/studentdashboard");
             }catch(error){
@@ -112,6 +114,7 @@ export default function SignUpLogin({role}){
                 })
                 console.log(res);
                 localStorage.setItem('token',res.data.token);
+                localStorage.setItem('name',res.data.faculty.name);
                 navigate(`/facultydashboard/${role}`,{state:role});
                 // res.data && navigate("http://localhost:3000/facultydashboard")
             }catch(error){

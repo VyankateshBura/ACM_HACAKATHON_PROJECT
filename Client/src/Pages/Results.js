@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 import Navbar2 from '../Components/Navbar2';
 function Results(){
     const role=useLocation().state
-    const [addcss,setaddcss] = useState("2vw");
+    const [addcss,setaddcss] = useState("8vw");
     useEffect(() => {
         AOS.init();
     }, [])
@@ -14,7 +14,7 @@ function Results(){
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("13vw");
+            setaddcss("19vw");
         }
         else{
             console.log("Navbar closed");
@@ -25,7 +25,7 @@ function Results(){
     <>
     <div className='result-page'>
     <Navbar2 shift = {shift} role={role}/>
-    <div className='result-outer-box'style={{marginLeft:`${addcss}`,width:"86%",height:'fit-content'}}>
+    <div className='result-outer-box'style={{marginLeft:`${addcss}`,width:"80%",height:'fit-content'}}>
         <div className='result-title'><p className='result-option-name'>Results</p></div>
         <div className='sem-result'>
         <div className="sem-title"><p className='result-option-name'>Semester I</p></div>

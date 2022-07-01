@@ -10,7 +10,7 @@ import Navbar2 from '../Components/Navbar2';
 // import {ReactComponent as DeleteIcon} from "../Icons/delete-icon.svg";
 
 export default function NotesPageStudent(){
-    const [addcss,setaddcss] = useState("2vw");
+    const [addcss,setaddcss] = useState("10vw");
     const [subjectchoosed,setSubjectchoosed] = useState(false);
     useEffect(() => {
         AOS.init();
@@ -76,11 +76,11 @@ export default function NotesPageStudent(){
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("13vw");
+            setaddcss("19vw");
         }
         else{
             console.log("Navbar closed");
-            setaddcss("8vw"); 
+            setaddcss("10vw"); 
         }
     }
     
@@ -89,7 +89,7 @@ export default function NotesPageStudent(){
         <>
         <div className='noteslist-page'>
     <Navbar2  shift = {shift} role={role}/>
-    <div className='noteslist-outer-box'style={{marginLeft:`${addcss}`,width:"86%",height:'fit-content'}}>
+    <div className='noteslist-outer-box'style={{marginLeft:`${addcss}`,width:"80%",height:'fit-content'}}>
     <div className='noteslist-title '><p className='noteslist-name m-auto'>Notes</p></div>
     <div className='d-flex flex-row justify-content-sm-evenly flex-wrap'  >
         { 

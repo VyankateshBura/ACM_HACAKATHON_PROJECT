@@ -6,7 +6,7 @@ import React,{useState,useEffect} from "react";
 import Navbar2 from '../Components/Navbar2';
 import { Link } from "react-router-dom";
 export default function ExamLogin(){
-    const [addcss,setaddcss] = useState("2vw");
+    const [addcss,setaddcss] = useState("8vw");
     useEffect(() => {
         AOS.init();
     }, [])
@@ -14,7 +14,7 @@ export default function ExamLogin(){
     function shift(value){
         if(value==true){
             console.log("Navbar active");
-            setaddcss("13vw");
+            setaddcss("19vw");
         }
         else{
             console.log("Navbar closed");
@@ -31,7 +31,7 @@ export default function ExamLogin(){
     <>
     <div className='exam-login-page'>
     <Navbar2 shift = {shift}role={role}/>
-    <div className='exam-login-outer-box'style={{marginLeft:`${addcss}`,width:"86%",height:'fit-content'}}>
+    <div className='exam-login-outer-box'style={{marginLeft:`${addcss}`,width:"80%",height:'fit-content'}}>
     <form onChange={handleexamsubj} value={examsubj}className="exam-form">
         <select className="sub-choice" >
         <option>Select Subject</option>

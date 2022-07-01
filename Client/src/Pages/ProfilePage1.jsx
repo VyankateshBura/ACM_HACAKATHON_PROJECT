@@ -34,7 +34,7 @@ function ProfilePage1() {
     return (
         <>
         <div className="Profile-page">
-            <Navbar2 shift={shift} role={role}/>
+            <Navbar2 name={profile?profile.name:null}shift={shift} role={role}/>
             <div className="Profile-outer-box" style={{marginLeft:`${addcss}`}}>
                 <div className="outer">
                     <div className="profile-button">

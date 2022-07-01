@@ -22,18 +22,22 @@
     padding-left: 4vw;
 }
 .dashboard-title{
-    width:25vh;
-    height:6vh;
+    width:fit-content;
+    height:fit-content;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 3px 3px inset #85858a;
     margin: 4vh 0px;
+    padding: 1vw;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content:center;
 }
 .dashboard-name{
+    width: fit-content;
+    height: fit-content;
+    margin:auto;
     font-family: 'Verdana';
     font-size: 20px;
     color:#282b77;
