@@ -1,5 +1,6 @@
 const dotenv = require('dotenv')
 dotenv.config({path:'config/config.env'});
+const multer = require('multer');
 facultyProfile = require("../../models/teacherprofile");
 ExamPaper = require("../../models/questionPapermodel")
 LiveExam = require("../../models/liveexamModel")
@@ -29,7 +30,8 @@ exports.sendSubject = catchAsyncError(async (req, res, next) => {
 });
 
 exports.sendPaper = catchAsyncError(async (req, res, next) => {
-    const questionPaper = await ExamPaper.find({ teacher: req.faculty._id, _id: req.params.id });
+    const data =  jwt.verify(req.headers.token,process.env.JWT_SECRETE);
+    const questionPaper = await ExamPaper.find({ Faculty_id: data.id, _id: req.params.id });
 
     if (!questionPaper) {
         return res.status(401).json({
@@ -43,56 +45,58 @@ exports.sendPaper = catchAsyncError(async (req, res, next) => {
     })
 }
 )
-exports.savePaper = catchAsyncError(async (req, res, next) => {
+exports.savePaper = catchAsyncError(multer().none(),async (req, res, next) => {
     console.log("Question paper arrived...");
-    const { name, marks, subject } = req.body;
-    if (!name || !marks) {
-        return res.status(401).json({
-            succses: false,
-            message: "question paper name or marks cannot be empty"
-        })
+    console.log(req.body);
+    // const { name, marks, subject } = req.body;
+    // if (!name || !marks) {
+    //     return res.status(401).json({
+    //         succses: false,
+    //         message: "question paper name or marks cannot be empty"
+    //     })
 
-    }
-    const paperAdded = await ExamPaper.create({
-        name, marks, subject,
-        teacher: req.faculty._id
-    })
+    // }
+    // const paperAdded = await ExamPaper.create({
+    //     name, marks, subject,
+    //     teacher: req.faculty._id
+    // })
     res.status(200).json({
         succses: true,
         message: "question paper added ",
-        paperAdded
+        // paperAdded
     })
 })
 
 exports.addQuestion = catchAsyncError(async (req, res, next) => {
-    const { questionTitle, typeOfQuestion, marks, option1, option2, option3, option4 } = req.body;
-    const subject = req.params.subject;
-    const paperid = req.params.id;
-    const questionPaper = await ExamPaper.findOne({ _id: paperid, teacher: req.faculty._id })
-    if (typeOfQuestion == "MCQ" && (option1 == undefined || option2 == undefined || option3 == undefined || option4 == option1 == undefined)) {
-        res.status(401).json({
-            succses: false,
-            message: "Option field Cannot be empty"
-        })
-    }
-    if (typeOfQuestion == "Theory") {
-        const questionsended = {
-            questionTitle, typeOfQuestion, marks
-        }
-        questionPaper.question.push(questionsended);
-        questionPaper.save();
-    }
-    if (typeOfQuestion == "MCQ") {
-        const questionsended = {
-            questionTitle, typeOfQuestion, marks, option1, option2, option3, option4
-        }
-        questionPaper.question.push(questionsended);
-        questionPaper.save();
-    }
-    res.status(201).json({
-        sucsses: true,
-        questionPaper
-    })
+    console.log("Request for question paper arrived")
+//     const { questionTitle, typeOfQuestion, marks, option1, option2, option3, option4 } = req.body;
+//     const subject = req.params.subject;
+//     const paperid = req.params.id;
+//     const questionPaper = await ExamPaper.findOne({ _id: paperid, teacher: req.faculty._id })
+//     if (typeOfQuestion == "MCQ" && (option1 == undefined || option2 == undefined || option3 == undefined || option4 == option1 == undefined)) {
+//         res.status(401).json({
+//             succses: false,
+//             message: "Option field Cannot be empty"
+//         })
+//     }
+//     if (typeOfQuestion == "Theory") {
+//         const questionsended = {
+//             questionTitle, typeOfQuestion, marks
+//         }
+//         questionPaper.question.push(questionsended);
+//         questionPaper.save();
+//     }
+//     if (typeOfQuestion == "MCQ") {
+//         const questionsended = {
+//             questionTitle, typeOfQuestion, marks, option1, option2, option3, option4
+//         }
+//         questionPaper.question.push(questionsended);
+//         questionPaper.save();
+//     }
+//     res.status(201).json({
+//         sucsses: true,
+//         questionPaper
+//     })
 })
 exports.deleteQuestion = catchAsyncError(async (req, res, next) => {
     const questionPaper = await ExamPaper.findOne({ teacher: req.faculty._id, _id: req.params.paperid });
@@ -143,7 +147,9 @@ exports.updateQuestion = catchAsyncError(async (req, res, next) => {
     })
 })
 exports.sendAllQuestionPapers = catchAsyncError(async (req, res, next) => {
-    const questionPapers = await ExamPaper.find({ subject: req.params.subject, teacher: req.faculty._id })
+    console.log("Request for Papers arrived!");
+    const data =  jwt.verify(req.headers.token,process.env.JWT_SECRETE);
+    const questionPapers = await ExamPaper.find({  Faculty_id:data.id })
     if (questionPapers.length == 0) {
         return res.status(201).json({
             succses: false,

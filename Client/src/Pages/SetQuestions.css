@@ -27,13 +27,28 @@
     margin-top: 10px;
     margin-bottom: 20px;
 }
-.question{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: fit-content;
+.Container{
+    display: inline-block;
+    width:90%;
+    padding: 2vw 2vh;
+    height:fit-content;
+    margin:2vw 2vh;
+    background-color: rgb(40, 40, 106);
+    border-radius: 20px;
+    
+}
+.Question_paper{
+    border:2px solid black;
+    width:90%;
+    height:fit-content;
+    border-radius: 10px;
+}
+.Question{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    width: 90%;
     height: fit-content;
+    color:black;
     background-color: white;
     padding: 1vh 2vw;
     padding-bottom: 3vh;

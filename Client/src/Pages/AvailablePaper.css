@@ -19,35 +19,55 @@
     padding-top: 5.5vh;
     padding-bottom: 5.5vh;
 }
+.paper-container{
+    height:"fit-content";
+    width: 70vw;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.paper:hover{
+    cursor:pointer;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
 .paper{
-    width: 60vw;
-    height: 10vh;
+    width: 20vw;
+    height: 25vh;
+    margin: 20px 20px;
     background-color: white;
     border:1px solid #282b77;
-    box-shadow: 2px 3px 3px #85858a;
+    box-shadow: 2px 3px 5px #85858a;
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin: 4vh 0px;
+    justify-content: center;
+
 }
 .paper-name{
     font-family: 'Verdana';
+    text-align: center;
+    text-justify: center;
     font-size: 20px;
     color:#282b77;
 }
 .avail-title{
+    display: block;
     width:36vw;
-    height:6vh;
+    height:10vh;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 3px 3px inset #85858a;
-    margin: 5.5vh 0px;
+    margin: 5.5vh 5px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content:center;
 }
 .avail-name{
+    margin:0 2.5px;
     font-family: 'Verdana';
     font-size: 20px;
     color:#282b77;

@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const ExamPaper = require("./models/questionPapermodel");
 const jwt = require("jsonwebtoken");
 const studentProfile = require("./models/studentprofile");
 const facultyProfile = require("./models/teacherprofile");
@@ -29,6 +31,7 @@ const corsOptions ={
    optionSuccessStatus:200,
 }
 app.use(express.json());
+// app.use(express.multipart());
 app.use(cookieParser());
 app.use(cors(corsOptions)) // Use this after the variable declaration
 app.use(express.urlencoded({extended:true}))
@@ -221,6 +224,47 @@ app.get('/api/v1/files/:filename',(req,res)=>{
     })
 
 })
+
+app.post('/api/v1/faculty/examination/setexam/:subject/createquestionpaper',multer().none(),async(req,res)=>{
+
+    try{
+        const { name,totalmarks, subject,question,faculty_name } = req.body;
+        const Question = JSON.parse(question);
+    if (!name || !totalmarks) {
+        return res.status(401).json({
+            succses: false,
+            message: "question paper name or marks cannot be empty"
+        })
+
+    }
+    const data = jwt.verify(req.headers.token,process.env.JWT_SECRETE);
+
+    const paperAdded = await ExamPaper.create({
+        name:name, 
+        marks:totalmarks, 
+        subject:subject,
+        question:Question,
+        Faculty_id: data.id,
+        Faculty:faculty_name
+    })
+    console.log(paperAdded);
+    paperAdded.save();
+     console.log("Message arrived")
+    res.status(200).json({msg:"Data received",paperAdded});
+    }catch(err){
+        console.log(err);
+    }
+
+
+})
+
+
+
+
+
+
+
+
 
 
 // //@route get /image/:filename

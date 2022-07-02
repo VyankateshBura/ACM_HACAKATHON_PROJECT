@@ -20,6 +20,7 @@ import ViewPdf from "../Pages/ViewPdf";
 import NotesPageFaculty from "../Pages/NotesPageFaculty";
 import NotesPageStudent from "../Pages/NotesPageStudent";
 import ViewFile from "../Pages/ViewFile";
+import EachPaper from "../Pages/EachPaper"
 import ProfilePage2 from "../Pages/ProfilePage2";
 import ProfilePage1 from "../Pages/ProfilePage1";
 import ProfilePage1Fac from "../Pages/ProfilePage1Fac";
@@ -44,6 +45,7 @@ function App() {
       <Route exact path='/answersheetslist' element={<AnswersheetsList/>}/>
       <Route exact path='/absentstudents' element={<AbsentStudents/>}/>
       <Route exact path='/availablepapers' element={<AvailablePaper/>}/>
+      <Route exact path='/availablepapers/:id' element={<EachPaper/>}/>
       <Route exact path='/setnewpaper/:id' element={<SetQuestions/>}/>
       <Route exact path='/savedpaper/:id' element={<SavedPaper/>}/>
       <Route exact path='/setquestions/:id/:id' element={<SetEachQuestion/>}/>

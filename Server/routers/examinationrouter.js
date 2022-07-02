@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require('multer');
 const { sendSubject, sendPaper, savePaper, addQuestion, deleteQuestion, updateQuestion, sendAllQuestionPapers, createLiveExam, sendLiveExam } = require("../controllers/examination/examinationcontrollers");
 const { isfacultyauthenticate, isauthenticate } = require("../middleware/authentication");
 const Router = express.Router();
@@ -6,7 +7,7 @@ const Router = express.Router();
 Router.route("/setexam").get(isfacultyauthenticate, sendSubject)
 module.exports = Router;
 Router.route("/setexam/:subject").get(isfacultyauthenticate, sendPaper)
-Router.route("/setexam/:subject/createquestionpaper").post(isfacultyauthenticate, savePaper)
+Router.route("/setexam/:subject/createquestionpaper",multer().none()).post(isfacultyauthenticate, savePaper)
 Router.route("/setexam/:subject/createquestionpaper/:id").put(isfacultyauthenticate, addQuestion)
 Router.route("/setexam/:subject/savepaper/:id").get(isfacultyauthenticate, sendPaper)
 Router.route("/setexam/:subject/:paperid/:questionid/delete").get(isfacultyauthenticate, deleteQuestion);

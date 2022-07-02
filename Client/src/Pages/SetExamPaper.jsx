@@ -2,6 +2,7 @@ import './SetExamPaper.css';
 import React,{useState,useEffect} from 'react';
 import {Link,useLocation} from 'react-router-dom';
 import axios from 'axios'
+import BlueButton from "../Components/BlueButton"
 import Cards from '../Components/Cards';
 import Navbar2 from '../Components/Navbar2';
 import OptionBoxBlue from '../Components/OptionBoxBlue';
@@ -60,15 +61,15 @@ export default function SetExamPaper(){
         
         </select>
     <div className="set-exam-options-box">
-        <Link to="/availablepapers">
-                <div className='Exam-button'>
-                        <h3>Available Papers</h3>
-                        </div>
+        <Link to="/availablepapers" className='mx-3'>
+            <div  >
+                <BlueButton title={"Available Papers"}/>
+            </div>
+                        {/* <Cards title={"Available Papers"} /> */}
                 </Link>
                 <Link to={"/setnewpaper/"+sub}>
-                <div className='Exam-button'>
-                   <h3>Set new paper</h3>
-                </div>
+                    <BlueButton title={"Set new paper"}/>
+                 {/* <Cards title={"Set New Paper"} /> */}
                 </Link>
             </div>
     </div>

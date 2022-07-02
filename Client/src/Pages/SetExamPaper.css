@@ -3,6 +3,12 @@
     flex-direction: column;
     margin: 0;
 }
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 .set-ex-outer-box{
     margin-left:10vw;
     margin-right: 10vw;
