@@ -9,6 +9,7 @@ import SubjectNotes from '../Components/SubjectNotes';
 import {useLocation} from "react-router-dom"
 // import {ReactComponent as DeleteIcon} from "../Icons/delete-icon.svg";
 export default function NotesPageFaculty(){
+  
     const [subject,setSubject] = useState(null);
     const [addcss,setaddcss] = useState("12vw");
     const [subjectchoosed,setSubjectchoosed] = useState(false);
@@ -37,6 +38,7 @@ export default function NotesPageFaculty(){
         }
     }
     const role=useLocation().state;
+    console.log(role)
     return(
         <>
         <div className='noteslist-page'>
@@ -52,7 +54,7 @@ export default function NotesPageFaculty(){
         })
         }
     </div>
-    <AddFile/>
+
         {/* <label className='add-notes-label'>Add file:  </label>
         <input type="file" placeholder="Add Image" />
         <button className="add-notes-button">Upload</button> */}

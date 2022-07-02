@@ -29,6 +29,7 @@ import CheckQue from "../Pages/CheckQue";
 import ExamLogin from "../Pages/ExamLogin";
 import LiveExam from "../Pages/LiveExam";
 import EachSubjectNotes from "../Pages/EachSubjectNotes";
+import NotesPage from "../Pages/NotesPage";
 function App() {
   return (
     <div className="App"> 
@@ -55,6 +56,7 @@ function App() {
       <Route exact path="/uploadnotes" element={<NotesPageFaculty/>}/>
       <Route exact path="/notes" element={<NotesPageStudent/>}/>
       <Route exact path="/notes/:subject" element={<EachSubjectNotes/>}/>
+      <Route exact path="/notes/:subject/:id" element={<NotesPage/>}/>
       <Route exact path="/viewfile" element={<ViewFile/>}/>
       <Route exact path="/studentprofileedit" element={<ProfilePage2/>}/>
       <Route exact path="/studentprofile" element={<ProfilePage1/>}/>

@@ -66,9 +66,10 @@ const storage = new GridFsStorage({
                 }
                 const token = req.headers.token;
                 const data = jwt.verify(token,process.env.JWT_SECRETE);
-                // console.log(data);
+                console.log(data);
+                // console.log(file.fieldname);
                 console.log("Inside the upload");
-                buff.toString('hex')
+                // buff.toString('hex')
 
                 const filename = `${file.fieldname}`+data.id+`${count}`+path.extname(file.originalname);
                 count++;
@@ -191,19 +192,19 @@ app.post('/api/v1/faculty/profile/update',upload.array('profiles'),async(req,res
 
 //@route get /files
 //desc Display all files in json
-// app.get('/api/v1/files',(req,res)=>{
-//     gfs.files.find().toArray((err,files)=>{
-//         //Check if files exist
-//         if(!files || files.length === 0){
-//             return res.status(404).json({
-//                 err:"No files exist"
-//             })
-//         }
-//         //Files exist
-//         return res.json(files);
+app.get('/api/v1/files',(req,res)=>{
+    gfs.files.find({filename:/^notes/}).toArray((err,files)=>{
+        //Check if files exist
+        if(!files || files.length === 0){
+            return res.status(404).json({
+                err:"No files exist"
+            })
+        }
+        //Files exist
+        return res.json(files);
 
-//     })
-// })
+    })
+})
 
 //Getting a single file
 //@route get /files/:filename
@@ -224,6 +225,73 @@ app.get('/api/v1/files/:filename',(req,res)=>{
     })
 
 })
+
+
+//Notes
+app.post('/api/v1/faculty/uploadnotes',upload.array('notes'),async(req,res)=>{
+    try {
+     
+     count=1;
+     res.status(200).json({
+         success: true,
+         message: "Notes added sussesfully ", 
+     })
+   } catch (error) {
+       console.log(error);
+   }
+     
+ })
+ 
+ //Upload the notes files
+ // app.post('/api/v1/upload/notes',upload.array('files'),(req,res)=>{
+ //     try {
+ //         typeoffile = "notes";
+ //         console.log(req.body);
+ //         res.json({file:req.files});
+ //     } catch (error) {
+ //         console.log(error);
+ //     }
+     
+ // })
+ 
+ 
+ 
+ //@route get /files
+ //desc Display all files in json
+ // app.get('/api/v1/files',(req,res)=>{
+ //     gfs.files.find().toArray((err,files)=>{
+ //         //Check if files exist
+ //         if(!files || files.length === 0){
+ //             return res.status(404).json({
+ //                 err:"No files exist"
+ //             })
+ //         }
+ //         //Files exist
+ //         return res.json(files);
+ 
+ //     })
+ // })
+ 
+ //Getting a single file
+ //@route get /files/:filename
+ // //desc Display single file in json
+ app.get('/api/v1/files/:filename',(req,res)=>{
+     gfs.files.findOne({filename:req.params.filename},(err,file)=>{
+          //Check if files exist
+          if(!file || file.length === 0){
+             return res.status(404).json({
+                 err:"No file exist"
+             })
+         }
+ 
+         //File exist
+         const readstream = gridFsBucket.openDownloadStreamByName(file.filename);
+         readstream.pipe(res);
+         // return res.json(file);
+     })
+ 
+ })
+ 
 
 app.post('/api/v1/faculty/examination/setexam/:subject/createquestionpaper',multer().none(),async(req,res)=>{
 

@@ -13,6 +13,7 @@ import { ReactComponent as EnrollIcon } from "../Icons/list-icon.svg";
 import { ReactComponent as LogoutWIcon } from "../Icons/logout-icon-white.svg";
 function SidebarFaculty({ role }) {
   let loc = useLocation();
+  console.log(role)
   // let curr_page = loc.pathname.split('/').pop();
   // console.log(curr_page)
   const [activepage,setActivepage] = useState({Faculty:'nav-link text-white',facultyprofile:'nav-link text-white',uploadnotes:'nav-link text-white',enroll:'nav-link text-white',setexampaper:'nav-link text-white',checkpaper:'nav-link text-white'});

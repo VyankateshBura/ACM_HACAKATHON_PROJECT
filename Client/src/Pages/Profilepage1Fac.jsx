@@ -9,7 +9,7 @@ import {Link,useLocation} from "react-router-dom";
 function ProfilePage1Fac() {
 
     const role=useLocation().state;
-
+    console.log(role);
     const [profile,setProfile] = useState(null);
     useEffect(()=>{
         axios.get('http://localhost:5000/api/v1/faculty/profile',{
