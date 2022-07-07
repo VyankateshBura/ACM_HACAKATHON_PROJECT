@@ -43,7 +43,7 @@ export default function SignUpLogin({role}){
     if(role==="Student"){
         data.prn = formData1.prn;
         axios
-        .post(`http://localhost:5000/api/v1/studentsignup`,{
+        .post(`/api/v1/studentsignup`,{
           data
         })
         .then(function (response) {
@@ -55,7 +55,7 @@ export default function SignUpLogin({role}){
     }
     else{
         axios
-      .post(`http://localhost:5000/api/v1/faculty/signup`,{
+      .post(`/api/v1/faculty/signup`,{
         data
        
       })
@@ -80,7 +80,7 @@ export default function SignUpLogin({role}){
             prn:formData1.prn
         }
         axios
-          .post("http://localhost:5000/api/v1/studentsignup",{
+          .post("/api/v1/studentsignup",{
             data
            
           })

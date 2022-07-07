@@ -12,6 +12,8 @@ const NotesPage = () => {
   }, [])
   function hideLoad(){
     setLoading(false);
+    console.log(window.location.host);
+    console.log(window.location.pathname);
     console.log("hide the load");
   }
   const [addcss,setaddcss] = useState("8vw");

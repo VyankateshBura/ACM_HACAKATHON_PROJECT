@@ -13,6 +13,7 @@ Router.route("/setexam/:subject/savepaper/:id").get(isfacultyauthenticate, sendP
 Router.route("/setexam/:subject/:paperid/:questionid/delete").get(isfacultyauthenticate, deleteQuestion);
 Router.route("/setexam/:subject/:paperid/:questionid/edit").put(isfacultyauthenticate, updateQuestion);
 Router.route("/setexam/:subject/availablequestionpaper").get(isfacultyauthenticate, sendAllQuestionPapers);
+Router.route("/examlogin/liveexampapers").get(sendLiveExam);
 Router.route("/setexam/:subject/availablequestionpaper/:paperid").delete(isfacultyauthenticate, sendAllQuestionPapers);
 Router.route("/dashboard/createliveExam").post(isfacultyauthenticate,
     createLiveExam)

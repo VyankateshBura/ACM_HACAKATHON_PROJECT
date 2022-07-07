@@ -39,7 +39,7 @@ export default function SignUpLogin({role}){
     if(role==="Student"){
         try{
             const res = await axios
-            .post(`http://localhost:5000/api/v1/student/studentsignup`,{
+            .post(`/api/v1/student/studentsignup`,{
                 name:formData1.name,
                 prn:formData1.prn,
                 email:formData1.email,
@@ -60,7 +60,7 @@ export default function SignUpLogin({role}){
     else{
         try{
             const res = await axios
-            .post(`http://localhost:5000/api/v1/faculty/signup`,{
+            .post(`/api/v1/faculty/signup`,{
                 name:formData1.name,
                 email:formData1.email,
                 password:formData1.password,

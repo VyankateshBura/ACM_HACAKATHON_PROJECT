@@ -65,6 +65,28 @@
 .set-exam-options-box :any-link{
     text-decoration: none;
 }
+
+.dabba{
+    height:30vh;
+    width:20vw;
+    border:5px solid white;
+    font-size: larger;
+    color:white;
+    border-radius:20px;
+    background-color: rgb(47, 179, 231);
+    box-shadow: 2px 2px 2px black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+.dabba:hover{
+    width:21vw;
+    height:31vh;
+    box-shadow: 2px 2px 5px 5px rgb(95, 93, 93);
+}
+
 .Exam-button{
     border: solid gray 1px;
     box-shadow: 2px 2px 5px inset gainsboro ;

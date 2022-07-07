@@ -30,6 +30,7 @@ const corsOptions ={
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }
+// app.use("/Home",express.static("./Client/public/index.html"))
 app.use(express.json());
 // app.use(express.multipart());
 app.use(cookieParser());
